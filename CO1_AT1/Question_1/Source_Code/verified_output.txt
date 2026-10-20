@@ -1,0 +1,23 @@
+Command: python3 scalability_audit.py
+
+ShopSphere scalability audit (n = 1,000,000; 10 operations/second)
+----------------------------------------------------------------------------------------------
+Module                                             Operations              Runtime  Complexity
+----------------------------------------------------------------------------------------------
+M1 duplicate detector                      499,999,500,000.00 49,999,950,000.00 s (1,585.49 years)  Theta(n^2)
+M2 API rate limiter                              1,048,575.00 104,857.50 s (1.21 days)  Theta(n)
+S2 product search (worst-case bound)                    21.00               2.10 s  Theta(log n)
+M4 recommendation engine: current          1,000,000,000,000.00 100,000,000,000.00 s (3,170.98 years)  Theta(n^2)
+M4 recommendation engine: redesign              19,931,568.57 1,993,156.86 s (23.07 days)  Theta(n log n)
+M5 sales analytics engine                      397,267,425.63 39,726,742.56 s (1.26 years)  Theta(n log^2 n)
+
+Nightly-window decision (10 minutes = 600 seconds):
+- M1 duplicate detector: FAIL - redesign required
+- M2 API rate limiter: FAIL - redesign required
+- S2 product search (worst-case bound): PASS
+- M4 recommendation engine: current: FAIL - redesign required
+- M4 recommendation engine: redesign: FAIL - redesign required
+- M5 sales analytics engine: FAIL - redesign required
+
+Command: python3 -m unittest -v test_scalability_audit.py
+Result: 4 tests passed, including M2 verification for n = 1,024.
