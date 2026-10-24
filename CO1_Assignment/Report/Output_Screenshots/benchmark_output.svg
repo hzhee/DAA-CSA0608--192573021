@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="175">
+<rect width="100%" height="100%" fill="#101820"/>
+<text x="25" y="35" font-family="Arial" font-size="20" font-weight="bold" fill="#e6edf3">Execution output: reproducible benchmark</text>
+<text x="30" y="65" font-family="Menlo,monospace" font-size="15" fill="#c9d1d9">Datasets: 1,000 | 10,000 | 100,000 | 1,000,000 records</text>
+<text x="30" y="88" font-family="Menlo,monospace" font-size="15" fill="#c9d1d9">Queries per dataset: 24 (12 present, 12 absent)</text>
+<text x="30" y="111" font-family="Menlo,monospace" font-size="15" fill="#c9d1d9">All strategies returned correct present/absent results.</text>
+<text x="30" y="134" font-family="Menlo,monospace" font-size="15" fill="#c9d1d9">CSV written: Task_9_Experimental_Performance/performance_results.csv</text>
+<text x="30" y="157" font-family="Menlo,monospace" font-size="15" fill="#c9d1d9">Chart written: Report/Tables_and_Graphs/comparison_growth.svg</text>
+</svg>

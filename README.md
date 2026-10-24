@@ -17,3 +17,7 @@ Run it from the source-code directory:
 python3 scalability_audit.py
 python3 -m unittest -v
 ```
+
+## CO1 Assignment - Student Search Strategy
+
+[`CO1_Assignment/`](CO1_Assignment/) contains the complete 50-mark student-record search assignment: three different algorithms, mathematical and asymptotic analysis, recurrence work, reproducible one-million-record experiments, evidence graphics, and the Day-4 design challenge.
