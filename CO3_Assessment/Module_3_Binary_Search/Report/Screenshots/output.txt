@@ -1,0 +1,8 @@
+Consolidated orders: [(101, 'O4'), (102, 'O2'), (102, 'O5'), (103, 'O6'), (105, 'O1'), (105, 'O3')]
+Search target: 102
+
+low=0, high=5, mid=2, timestamp=102
+low=0, high=1, mid=0, timestamp=101
+low=1, high=1, mid=1, timestamp=102
+
+First match: index 1, order (102, 'O2')
