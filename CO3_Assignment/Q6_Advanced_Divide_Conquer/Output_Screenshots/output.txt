@@ -1,0 +1,2 @@
+4th smallest: 4
+MITM: (True, 8, 8)

@@ -1,0 +1,1 @@
+Maximum sales-period gain: (6, 3, 6)
