@@ -1,0 +1,227 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 7 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+4 0 obj
+<< /Length 2730 >>
+stream
+BT
+/F1 9 Tf
+50 762.0 Td
+(================================================================================) Tj
+50 749.0 Td
+(  Q2 Sequential Search) Tj
+50 736.0 Td
+(  Student: HRUZHEECAYSHAN T K  |  Reg No: 192573021) Tj
+50 723.0 Td
+(  CO2 Assignment - Design and Analysis of Algorithms) Tj
+50 710.0 Td
+(================================================================================) Tj
+50 697.0 Td
+() Tj
+50 684.0 Td
+(Q2 - Sequential Search Engineering Decision \(4 Marks\)) Tj
+50 671.0 Td
+(======================================================) Tj
+50 658.0 Td
+(Problem: Tool-tracking system asks "Who has Tool T-184?" using sequential search.) Tj
+50 645.0 Td
+() Tj
+50 632.0 Td
+() Tj
+50 619.0 Td
+(ALGORITHM: SequentialSearch\(A[0..n-1], target\)) Tj
+50 606.0 Td
+(-----------------------------------------------) Tj
+50 593.0 Td
+(// Search for target by examining each element from left to right) Tj
+50 580.0 Td
+(// Input : Array A of n elements, search key target) Tj
+50 567.0 Td
+(// Output: Index of target \(or -1 if not found\), comparison count) Tj
+50 554.0 Td
+() Tj
+50 541.0 Td
+(  comparisons <- 0) Tj
+50 528.0 Td
+(  FOR i <- 0 TO n-1 DO) Tj
+50 515.0 Td
+(      comparisons <- comparisons + 1) Tj
+50 502.0 Td
+(      IF A[i] = target THEN) Tj
+50 489.0 Td
+(          RETURN i, comparisons           // Successful: found at position i) Tj
+50 476.0 Td
+(      END IF) Tj
+50 463.0 Td
+(  END FOR) Tj
+50 450.0 Td
+(  RETURN -1, comparisons                 // Unsuccessful: not in array) Tj
+50 437.0 Td
+() Tj
+50 424.0 Td
+(Step-by-Step Logic:) Tj
+50 411.0 Td
+(  1. Start at index 0.) Tj
+50 398.0 Td
+(  2. Compare current element with target.) Tj
+50 385.0 Td
+(  3. If match: return index and comparison count immediately.) Tj
+50 372.0 Td
+(  4. If no match: move to next element.) Tj
+50 359.0 Td
+(  5. If end of array reached without match: return -1.) Tj
+50 346.0 Td
+() Tj
+50 333.0 Td
+() Tj
+50 320.0 Td
+(ANALYSIS OF SEARCH SCENARIOS) Tj
+50 307.0 Td
+(==============================) Tj
+50 294.0 Td
+() Tj
+50 281.0 Td
+(  Successful search at position p \(0-indexed\):) Tj
+50 268.0 Td
+(    comparisons = p + 1) Tj
+50 255.0 Td
+() Tj
+50 242.0 Td
+(    Position  | Comparisons | % of n) Tj
+50 229.0 Td
+(    ----------+-------------+-------) Tj
+50 216.0 Td
+(    First \(0\) |      1      |  1/n) Tj
+50 203.0 Td
+(    Middle    |    n/2      |  50%) Tj
+50 190.0 Td
+(    Last      |     n       | 100%) Tj
+50 177.0 Td
+() Tj
+50 164.0 Td
+(  Average successful search:) Tj
+50 151.0 Td
+(    E[comparisons] = \(1/n\) * SUM\(i=1 to n\) i = \(n+1\)/2 ~ n/2) Tj
+50 138.0 Td
+() Tj
+50 125.0 Td
+(  Unsuccessful search:) Tj
+50 112.0 Td
+(    comparisons = n  \(must check every element\)) Tj
+50 99.0 Td
+() Tj
+50 86.0 Td
+() Tj
+50 73.0 Td
+(COMPLEXITY SUMMARY) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 2020 >>
+stream
+BT
+/F1 9 Tf
+50 782.0 Td
+(===================) Tj
+50 769.0 Td
+(  Scenario          | Comparisons | Big-O) Tj
+50 756.0 Td
+(  ------------------+-------------+------) Tj
+50 743.0 Td
+(  Best Case         |      1      | O\(1\)) Tj
+50 730.0 Td
+(  Average \(success\) |   \(n+1\)/2   | O\(n\)) Tj
+50 717.0 Td
+(  Worst Case        |      n      | O\(n\)) Tj
+50 704.0 Td
+(  Unsuccessful      |      n      | O\(n\)) Tj
+50 691.0 Td
+() Tj
+50 678.0 Td
+() Tj
+50 665.0 Td
+(ENGINEERING BOUNDARY ANALYSIS) Tj
+50 652.0 Td
+(===============================) Tj
+50 639.0 Td
+() Tj
+50 626.0 Td
+(  Original system: n = 100 tools) Tj
+50 613.0 Td
+(    - Worst case per query: 100 comparisons) Tj
+50 600.0 Td
+(    - 50 queries/day => 50 * 100 = 5,000 comparisons/day) Tj
+50 587.0 Td
+(    - VERDICT: Sequential search is APPROPRIATE) Tj
+50 574.0 Td
+() Tj
+50 561.0 Td
+(  Expanded system: n = 10,000 tools) Tj
+50 548.0 Td
+(    - Worst case per query: 10,000 comparisons) Tj
+50 535.0 Td
+(    - 1,000 queries/day => 1,000 * 10,000 = 10,000,000 comparisons/day) Tj
+50 522.0 Td
+(    - Binary search alternative: log2\(10000\) ~ 14 comparisons per query) Tj
+50 509.0 Td
+(      with one-time sort cost O\(n log n\) = 10,000 * 14 = 140,000) Tj
+50 496.0 Td
+(    - 1,000 * 14 = 14,000 comparisons/day \(after sort\)) Tj
+50 483.0 Td
+(    - VERDICT: Sequential search NO LONGER APPROPRIATE) Tj
+50 470.0 Td
+() Tj
+50 457.0 Td
+(  Decision Rule:) Tj
+50 444.0 Td
+(    IF n <= 1,000 AND search_frequency <= 100/day THEN) Tj
+50 431.0 Td
+(        Sequential Search is APPROPRIATE) Tj
+50 418.0 Td
+(    ELSE IF n > 1,000 OR search_frequency > 100/day THEN) Tj
+50 405.0 Td
+(        Sort array ONCE then use Binary Search) Tj
+50 392.0 Td
+(    END IF) Tj
+50 379.0 Td
+() Tj
+50 366.0 Td
+(  Changed Condition Response:) Tj
+50 353.0 Td
+(    At 10,000 tools with 1,000 queries/day, the overhead of sequential) Tj
+50 340.0 Td
+(    search is 714x greater than binary search per query.) Tj
+50 327.0 Td
+(    RECOMMENDATION: Pre-sort by tool ID, use binary search O\(log n\).) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 5 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000121 00000 n 
+0000000189 00000 n 
+0000002971 00000 n 
+0000005043 00000 n 
+0000005169 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+5295
+%%EOF

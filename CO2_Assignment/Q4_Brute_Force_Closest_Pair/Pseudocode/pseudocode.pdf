@@ -1,0 +1,235 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 7 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+4 0 obj
+<< /Length 2802 >>
+stream
+BT
+/F1 9 Tf
+50 762.0 Td
+(================================================================================) Tj
+50 749.0 Td
+(  Q4 Brute Force Closest Pair) Tj
+50 736.0 Td
+(  Student: HRUZHEECAYSHAN T K  |  Reg No: 192573021) Tj
+50 723.0 Td
+(  CO2 Assignment - Design and Analysis of Algorithms) Tj
+50 710.0 Td
+(================================================================================) Tj
+50 697.0 Td
+() Tj
+50 684.0 Td
+(Q4 - Brute-Force Closest Pair of Points \(6 Marks\)) Tj
+50 671.0 Td
+(==================================================) Tj
+50 658.0 Td
+(Problem: Drone monitoring system finds the two drones closest to each other.) Tj
+50 645.0 Td
+() Tj
+50 632.0 Td
+() Tj
+50 619.0 Td
+(ALGORITHM: BruteForceClosestPair\(P[0..n-1]\)) Tj
+50 606.0 Td
+(--------------------------------------------) Tj
+50 593.0 Td
+(// Find the pair of points with minimum Euclidean distance) Tj
+50 580.0 Td
+(// Input : Array P of n points, each P[i] = \(x_i, y_i\)) Tj
+50 567.0 Td
+(// Output: Indices of closest pair, minimum distance, distance_calculations count) Tj
+50 554.0 Td
+() Tj
+50 541.0 Td
+(  min_dist  <- INFINITY) Tj
+50 528.0 Td
+(  pair      <- \(-1, -1\)) Tj
+50 515.0 Td
+(  dist_calcs <- 0) Tj
+50 502.0 Td
+() Tj
+50 489.0 Td
+(  FOR i <- 0 TO n-2 DO) Tj
+50 476.0 Td
+(      FOR j <- i+1 TO n-1 DO) Tj
+50 463.0 Td
+(          dist_calcs <- dist_calcs + 1) Tj
+50 450.0 Td
+(          d <- SQRT\(\(P[i].x - P[j].x\)^2 + \(P[i].y - P[j].y\)^2\)) Tj
+50 437.0 Td
+(          IF d < min_dist THEN) Tj
+50 424.0 Td
+(              min_dist <- d) Tj
+50 411.0 Td
+(              pair     <- \(i, j\)) Tj
+50 398.0 Td
+(          END IF) Tj
+50 385.0 Td
+(      END FOR) Tj
+50 372.0 Td
+(  END FOR) Tj
+50 359.0 Td
+(  RETURN pair, min_dist, dist_calcs) Tj
+50 346.0 Td
+() Tj
+50 333.0 Td
+(Step-by-Step Logic:) Tj
+50 320.0 Td
+(  1. Initialise minimum distance to infinity.) Tj
+50 307.0 Td
+(  2. Consider every distinct pair \(i, j\) where i < j.) Tj
+50 294.0 Td
+(  3. For each pair, compute Euclidean distance d\(P_i, P_j\).) Tj
+50 281.0 Td
+(  4. If this distance is smaller than current minimum, update.) Tj
+50 268.0 Td
+(  5. After all pairs examined, return the closest pair.) Tj
+50 255.0 Td
+(  6. Total pairs considered = n\(n-1\)/2.) Tj
+50 242.0 Td
+() Tj
+50 229.0 Td
+() Tj
+50 216.0 Td
+(CANDIDATE PAIR REPRESENTATION) Tj
+50 203.0 Td
+(===============================) Tj
+50 190.0 Td
+(  - Each candidate is an unordered pair {i, j} with i < j.) Tj
+50 177.0 Td
+(  - Total candidates = C\(n,2\) = n\(n-1\)/2.) Tj
+50 164.0 Td
+(  - For n=10: 45 pairs | n=100: 4,950 | n=1000: 499,500) Tj
+50 151.0 Td
+() Tj
+50 138.0 Td
+() Tj
+50 125.0 Td
+(DISTANCE CALCULATION) Tj
+50 112.0 Td
+(=====================) Tj
+50 99.0 Td
+(  Euclidean distance:) Tj
+50 86.0 Td
+(    d\(P_i, P_j\) = sqrt\( \(x_i - x_j\)^2 + \(y_i - y_j\)^2 \)) Tj
+50 73.0 Td
+() Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 2163 >>
+stream
+BT
+/F1 9 Tf
+50 782.0 Td
+(  Optimisation: compare d^2 to avoid sqrt \(if only ordering needed\):) Tj
+50 769.0 Td
+(    d^2\(P_i, P_j\) = \(x_i - x_j\)^2 + \(y_i - y_j\)^2) Tj
+50 756.0 Td
+(  This saves sqrt computation but distance value still needs sqrt at end.) Tj
+50 743.0 Td
+() Tj
+50 730.0 Td
+() Tj
+50 717.0 Td
+(COMPLEXITY ANALYSIS) Tj
+50 704.0 Td
+(====================) Tj
+50 691.0 Td
+(  Number of distance calculations = n\(n-1\)/2) Tj
+50 678.0 Td
+() Tj
+50 665.0 Td
+(  n     | Distance Calcs  | Ratio to n=100) Tj
+50 652.0 Td
+(  ------+-----------------+---------------) Tj
+50 639.0 Td
+(   10   |        45       |     --) Tj
+50 626.0 Td
+(   50   |     1,225       |     --) Tj
+50 613.0 Td
+(  100   |     4,950       |   1.0x) Tj
+50 600.0 Td
+(  200   |    19,900       |   4.0x  \(doubles n -> 4x work\)) Tj
+50 587.0 Td
+(  500   |   124,750       |  25.2x) Tj
+50 574.0 Td
+( 1000   |   499,500       | ~100x) Tj
+50 561.0 Td
+() Tj
+50 548.0 Td
+(  When n doubles: comparisons quadruple \(confirms O\(n^2\) growth\)) Tj
+50 535.0 Td
+(  T\(n\) = n\(n-1\)/2 in Theta\(n^2\)) Tj
+50 522.0 Td
+() Tj
+50 509.0 Td
+() Tj
+50 496.0 Td
+(LIMITATION OF BRUTE-FORCE) Tj
+50 483.0 Td
+(===========================) Tj
+50 470.0 Td
+(  - O\(n^2\) becomes impractical for n > 100,000 drones.) Tj
+50 457.0 Td
+(  - Divide-and-Conquer closest pair runs in O\(n log n\).) Tj
+50 444.0 Td
+(  - For a real drone monitoring system with many drones, a spatial) Tj
+50 431.0 Td
+(    index \(k-d tree\) or divide-and-conquer would be recommended.) Tj
+50 418.0 Td
+(  - Brute force is acceptable for n <= ~10,000 drone fleets.) Tj
+50 405.0 Td
+() Tj
+50 392.0 Td
+() Tj
+50 379.0 Td
+(TEST DATASETS) Tj
+50 366.0 Td
+(==============) Tj
+50 353.0 Td
+(  Dataset 1 \(Boundary + Interior mix\):) Tj
+50 340.0 Td
+(    Points: \(0,0\),\(10,0\),\(10,10\),\(0,10\),\(5,5\),\(3,3\),\(7,8\),\(1,9\)) Tj
+50 327.0 Td
+(    Expected closest pair: interior points near each other) Tj
+50 314.0 Td
+() Tj
+50 301.0 Td
+(  Dataset 2 \(Stress test - dense cluster\):) Tj
+50 288.0 Td
+(    50 random points in [0,1]x[0,1] -- many very close pairs) Tj
+50 275.0 Td
+(    Tests worst-case scenario where min_dist updates frequently) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 5 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000121 00000 n 
+0000000189 00000 n 
+0000003043 00000 n 
+0000005258 00000 n 
+0000005384 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+5510
+%%EOF

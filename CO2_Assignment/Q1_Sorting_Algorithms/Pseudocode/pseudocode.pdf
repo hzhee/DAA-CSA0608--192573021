@@ -1,0 +1,366 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [7 0 R 8 0 R 9 0 R] /Count 3 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+4 0 obj
+<< /Length 2799 >>
+stream
+BT
+/F1 9 Tf
+50 762.0 Td
+(================================================================================) Tj
+50 749.0 Td
+(  Q1 Sorting Algorithms) Tj
+50 736.0 Td
+(  Student: HRUZHEECAYSHAN T K  |  Reg No: 192573021) Tj
+50 723.0 Td
+(  CO2 Assignment - Design and Analysis of Algorithms) Tj
+50 710.0 Td
+(================================================================================) Tj
+50 697.0 Td
+() Tj
+50 684.0 Td
+(Q1 - Sorting Under Different Data Conditions \(6 Marks\)) Tj
+50 671.0 Td
+(=======================================================) Tj
+50 658.0 Td
+(Problem: Emergency dispatch system uses Selection, Bubble, Insertion Sort.) Tj
+50 645.0 Td
+(Data arrives in random, sorted, reverse, or nearly-sorted order.) Tj
+50 632.0 Td
+() Tj
+50 619.0 Td
+() Tj
+50 606.0 Td
+(ALGORITHM 1: SelectionSort\(A[0..n-1]\)) Tj
+50 593.0 Td
+(--------------------------------------) Tj
+50 580.0 Td
+(// Sorts array A by repeatedly selecting the minimum element) Tj
+50 567.0 Td
+(// Input : Array A of n comparable elements) Tj
+50 554.0 Td
+(// Output: Sorted A, comparison count) Tj
+50 541.0 Td
+() Tj
+50 528.0 Td
+(  comparisons <- 0) Tj
+50 515.0 Td
+(  FOR i <- 0 TO n-2 DO) Tj
+50 502.0 Td
+(      min_idx <- i) Tj
+50 489.0 Td
+(      FOR j <- i+1 TO n-1 DO) Tj
+50 476.0 Td
+(          comparisons <- comparisons + 1) Tj
+50 463.0 Td
+(          IF A[j] < A[min_idx] THEN) Tj
+50 450.0 Td
+(              min_idx <- j) Tj
+50 437.0 Td
+(          END IF) Tj
+50 424.0 Td
+(      END FOR) Tj
+50 411.0 Td
+(      IF min_idx != i THEN) Tj
+50 398.0 Td
+(          SWAP\(A[i], A[min_idx]\)) Tj
+50 385.0 Td
+(      END IF) Tj
+50 372.0 Td
+(  END FOR) Tj
+50 359.0 Td
+(  RETURN A, comparisons) Tj
+50 346.0 Td
+() Tj
+50 333.0 Td
+(Step-by-Step Logic:) Tj
+50 320.0 Td
+(  1. Assume first element of unsorted portion is minimum.) Tj
+50 307.0 Td
+(  2. Scan remaining unsorted elements \(inner loop\).) Tj
+50 294.0 Td
+(  3. Each comparison checks: is current element smaller than current min?) Tj
+50 281.0 Td
+(  4. After full inner scan, swap minimum to front of unsorted portion.) Tj
+50 268.0 Td
+(  5. Advance boundary: unsorted portion shrinks by 1.) Tj
+50 255.0 Td
+(  6. After n-1 passes, array is fully sorted.) Tj
+50 242.0 Td
+() Tj
+50 229.0 Td
+(Complexity:) Tj
+50 216.0 Td
+(  Best Case  : O\(n^2\)  -- always n\(n-1\)/2 comparisons regardless of input) Tj
+50 203.0 Td
+(  Worst Case : O\(n^2\)) Tj
+50 190.0 Td
+(  Average    : O\(n^2\)) Tj
+50 177.0 Td
+(  Space      : O\(1\) in-place) Tj
+50 164.0 Td
+() Tj
+50 151.0 Td
+() Tj
+50 138.0 Td
+(ALGORITHM 2: BubbleSort\(A[0..n-1]\)) Tj
+50 125.0 Td
+(------------------------------------) Tj
+50 112.0 Td
+(// Repeatedly swap adjacent elements that are out of order) Tj
+50 99.0 Td
+(// Input : Array A of n comparable elements) Tj
+50 86.0 Td
+(// Output: Sorted A, comparison count) Tj
+50 73.0 Td
+() Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 2650 >>
+stream
+BT
+/F1 9 Tf
+50 782.0 Td
+(  comparisons <- 0) Tj
+50 769.0 Td
+(  FOR i <- 0 TO n-2 DO) Tj
+50 756.0 Td
+(      swapped <- FALSE) Tj
+50 743.0 Td
+(      FOR j <- 0 TO n-2-i DO) Tj
+50 730.0 Td
+(          comparisons <- comparisons + 1) Tj
+50 717.0 Td
+(          IF A[j] > A[j+1] THEN) Tj
+50 704.0 Td
+(              SWAP\(A[j], A[j+1]\)) Tj
+50 691.0 Td
+(              swapped <- TRUE) Tj
+50 678.0 Td
+(          END IF) Tj
+50 665.0 Td
+(      END FOR) Tj
+50 652.0 Td
+(      IF NOT swapped THEN) Tj
+50 639.0 Td
+(          BREAK              // Early termination: already sorted) Tj
+50 626.0 Td
+(      END IF) Tj
+50 613.0 Td
+(  END FOR) Tj
+50 600.0 Td
+(  RETURN A, comparisons) Tj
+50 587.0 Td
+() Tj
+50 574.0 Td
+(Step-by-Step Logic:) Tj
+50 561.0 Td
+(  1. Each pass bubbles the largest unsorted element to its final position.) Tj
+50 548.0 Td
+(  2. Compare every adjacent pair from left to right.) Tj
+50 535.0 Td
+(  3. Swap if left > right \(out of order\).) Tj
+50 522.0 Td
+(  4. If no swaps in a full pass => array is already sorted => stop early.) Tj
+50 509.0 Td
+(  5. Worst case: n-1 passes needed.) Tj
+50 496.0 Td
+() Tj
+50 483.0 Td
+(Complexity:) Tj
+50 470.0 Td
+(  Best Case  : O\(n\)  -- already sorted, one pass, zero swaps, early exit) Tj
+50 457.0 Td
+(  Worst Case : O\(n^2\) -- reverse sorted) Tj
+50 444.0 Td
+(  Average    : O\(n^2\)) Tj
+50 431.0 Td
+(  Space      : O\(1\) in-place) Tj
+50 418.0 Td
+() Tj
+50 405.0 Td
+() Tj
+50 392.0 Td
+(ALGORITHM 3: InsertionSort\(A[0..n-1]\)) Tj
+50 379.0 Td
+(---------------------------------------) Tj
+50 366.0 Td
+(// Insert each element into its correct position in the sorted prefix) Tj
+50 353.0 Td
+(// Input : Array A of n comparable elements) Tj
+50 340.0 Td
+(// Output: Sorted A, comparison count) Tj
+50 327.0 Td
+() Tj
+50 314.0 Td
+(  comparisons <- 0) Tj
+50 301.0 Td
+(  FOR i <- 1 TO n-1 DO) Tj
+50 288.0 Td
+(      key <- A[i]) Tj
+50 275.0 Td
+(      j   <- i - 1) Tj
+50 262.0 Td
+(      WHILE j >= 0 AND A[j] > key DO) Tj
+50 249.0 Td
+(          comparisons <- comparisons + 1) Tj
+50 236.0 Td
+(          A[j+1] <- A[j]           // Shift right) Tj
+50 223.0 Td
+(          j <- j - 1) Tj
+50 210.0 Td
+(      END WHILE) Tj
+50 197.0 Td
+(      IF j >= 0 THEN) Tj
+50 184.0 Td
+(          comparisons <- comparisons + 1   // The final failing comparison) Tj
+50 171.0 Td
+(      END IF) Tj
+50 158.0 Td
+(      A[j+1] <- key) Tj
+50 145.0 Td
+(  END FOR) Tj
+50 132.0 Td
+(  RETURN A, comparisons) Tj
+50 119.0 Td
+() Tj
+50 106.0 Td
+(Step-by-Step Logic:) Tj
+50 93.0 Td
+(  1. Treat A[0] as a one-element sorted sub-array.) Tj
+50 80.0 Td
+(  2. Pick next element \(key = A[i]\).) Tj
+50 67.0 Td
+(  3. Walk backwards through sorted portion.) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Length 2511 >>
+stream
+BT
+/F1 9 Tf
+50 782.0 Td
+(  4. Shift every element greater than key one position right.) Tj
+50 769.0 Td
+(  5. Drop key into the gap created.) Tj
+50 756.0 Td
+(  6. Sorted portion grows by 1; repeat.) Tj
+50 743.0 Td
+() Tj
+50 730.0 Td
+(Complexity:) Tj
+50 717.0 Td
+(  Best Case  : O\(n\)  -- already sorted, one comparison per element) Tj
+50 704.0 Td
+(  Worst Case : O\(n^2\) -- reverse sorted, maximum shifts) Tj
+50 691.0 Td
+(  Average    : O\(n^2\)) Tj
+50 678.0 Td
+(  Space      : O\(1\) in-place) Tj
+50 665.0 Td
+() Tj
+50 652.0 Td
+() Tj
+50 639.0 Td
+(COMPLEXITY COMPARISON TABLE) Tj
+50 626.0 Td
+(============================) Tj
+50 613.0 Td
+(  Algorithm     | Best     | Average  | Worst    | Stable | Adaptive) Tj
+50 600.0 Td
+(  --------------+----------+----------+----------+--------+---------) Tj
+50 587.0 Td
+(  Selection     | O\(n^2\)   | O\(n^2\)   | O\(n^2\)   |  No    |  No) Tj
+50 574.0 Td
+(  Bubble        | O\(n\)     | O\(n^2\)   | O\(n^2\)   |  Yes   |  Yes) Tj
+50 561.0 Td
+(  Insertion     | O\(n\)     | O\(n^2\)   | O\(n^2\)   |  Yes   |  Yes) Tj
+50 548.0 Td
+() Tj
+50 535.0 Td
+() Tj
+50 522.0 Td
+(MATHEMATICAL DERIVATION) Tj
+50 509.0 Td
+(========================) Tj
+50 496.0 Td
+(  Selection Sort comparisons = SUM\(i=0 to n-2\) \(n-1-i\)) Tj
+50 483.0 Td
+(                              = \(n-1\)+\(n-2\)+...+1 = n\(n-1\)/2) Tj
+50 470.0 Td
+() Tj
+50 457.0 Td
+(  Bubble Sort worst           = n\(n-1\)/2   [same sum]) Tj
+50 444.0 Td
+(  Insertion Sort worst        = SUM\(i=1 to n-1\) i = n\(n-1\)/2) Tj
+50 431.0 Td
+() Tj
+50 418.0 Td
+(  For n=1000: n\(n-1\)/2 = 499,500 comparisons \(confirmed by experiment\)) Tj
+50 405.0 Td
+() Tj
+50 392.0 Td
+() Tj
+50 379.0 Td
+(ENGINEERING RECOMMENDATION) Tj
+50 366.0 Td
+(===========================) Tj
+50 353.0 Td
+(  RECOMMENDATION: Use INSERTION SORT for the emergency dispatch system.) Tj
+50 340.0 Td
+() Tj
+50 327.0 Td
+(  Reasoning:) Tj
+50 314.0 Td
+(    1. Emergency data is typically NEARLY SORTED \(priority updates arrive) Tj
+50 301.0 Td
+(       incrementally, most items retain their relative order\).) Tj
+50 288.0 Td
+(    2. Insertion Sort achieves O\(n\) for sorted/nearly-sorted data.) Tj
+50 275.0 Td
+(    3. It is STABLE: equal-priority items retain their original order.) Tj
+50 262.0 Td
+(    4. It is ADAPTIVE: performance degrades gracefully with input disorder.) Tj
+50 249.0 Td
+(    5. Selection Sort is NEVER adaptive -- always O\(n^2\) -- avoid it here.) Tj
+50 236.0 Td
+(    6. For n > 10,000: upgrade to Merge Sort or Timsort \(O\(n log n\)\).) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 5 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 6 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000127 00000 n 
+0000000195 00000 n 
+0000003046 00000 n 
+0000005748 00000 n 
+0000008311 00000 n 
+0000008437 00000 n 
+0000008563 00000 n 
+trailer
+<< /Size 10 /Root 1 0 R >>
+startxref
+8689
+%%EOF

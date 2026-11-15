@@ -1,0 +1,233 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 7 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+4 0 obj
+<< /Length 3032 >>
+stream
+BT
+/F1 9 Tf
+50 762.0 Td
+(================================================================================) Tj
+50 749.0 Td
+(  Q3 Brute Force String Matching) Tj
+50 736.0 Td
+(  Student: HRUZHEECAYSHAN T K  |  Reg No: 192573021) Tj
+50 723.0 Td
+(  CO2 Assignment - Design and Analysis of Algorithms) Tj
+50 710.0 Td
+(================================================================================) Tj
+50 697.0 Td
+() Tj
+50 684.0 Td
+(Q3 - Brute-Force String Matching \(6 Marks\)) Tj
+50 671.0 Td
+(==========================================) Tj
+50 658.0 Td
+(Problem: Security log screening uses brute-force pattern matching.) Tj
+50 645.0 Td
+() Tj
+50 632.0 Td
+() Tj
+50 619.0 Td
+(ALGORITHM: BruteForceStringMatch\(text[0..n-1], pattern[0..m-1]\)) Tj
+50 606.0 Td
+(----------------------------------------------------------------) Tj
+50 593.0 Td
+(// Search for first occurrence of pattern in text) Tj
+50 580.0 Td
+(// Input : Text of length n, Pattern of length m) Tj
+50 567.0 Td
+(// Output: Index of first match \(-1 if not found\), comparison count) Tj
+50 554.0 Td
+() Tj
+50 541.0 Td
+(  comparisons <- 0) Tj
+50 528.0 Td
+(  FOR i <- 0 TO n-m DO) Tj
+50 515.0 Td
+(      j <- 0) Tj
+50 502.0 Td
+(      WHILE j < m AND text[i+j] = pattern[j] DO) Tj
+50 489.0 Td
+(          comparisons <- comparisons + 1) Tj
+50 476.0 Td
+(          j <- j + 1) Tj
+50 463.0 Td
+(      END WHILE) Tj
+50 450.0 Td
+(      IF j < m THEN) Tj
+50 437.0 Td
+(          comparisons <- comparisons + 1   // The mismatching comparison) Tj
+50 424.0 Td
+(      END IF) Tj
+50 411.0 Td
+(      IF j = m THEN) Tj
+50 398.0 Td
+(          RETURN i, comparisons            // Match found at index i) Tj
+50 385.0 Td
+(      END IF) Tj
+50 372.0 Td
+(  END FOR) Tj
+50 359.0 Td
+(  RETURN -1, comparisons                   // Not found) Tj
+50 346.0 Td
+() Tj
+50 333.0 Td
+(Step-by-Step Logic:) Tj
+50 320.0 Td
+(  1. Align pattern at position i=0 in the text.) Tj
+50 307.0 Td
+(  2. Compare pattern[0] with text[0], pattern[1] with text[1], etc.) Tj
+50 294.0 Td
+(  3. If all m characters match: pattern found at index i -- return.) Tj
+50 281.0 Td
+(  4. If a mismatch occurs: shift pattern one position right \(i <- i+1\).) Tj
+50 268.0 Td
+(  5. Repeat for all valid alignment positions \(0 to n-m\).) Tj
+50 255.0 Td
+(  6. If no match found after all positions: return -1.) Tj
+50 242.0 Td
+() Tj
+50 229.0 Td
+() Tj
+50 216.0 Td
+(ENGINEERING THE BEHAVIOUR) Tj
+50 203.0 Td
+(==========================) Tj
+50 190.0 Td
+() Tj
+50 177.0 Td
+(  BEST CASE -- 1 comparison per alignment \(mismatch on first character\):) Tj
+50 164.0 Td
+(    Design: Text has NO occurrence of pattern[0]) Tj
+50 151.0 Td
+(    Example:) Tj
+50 138.0 Td
+(      Text:    "AAAAAAAAAAAAAAAAAA"  \(n=18, all 'A'\)) Tj
+50 125.0 Td
+(      Pattern: "BAAAA"              \(m=5, starts with 'B'\)) Tj
+50 112.0 Td
+(    Result: 1 comparison per alignment, total = n-m+1 comparisons) Tj
+50 99.0 Td
+(    Total comparisons = n - m + 1 = O\(n\)) Tj
+50 86.0 Td
+() Tj
+50 73.0 Td
+(  WORST CASE -- m comparisons per alignment \(mismatch on last character\):) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 2058 >>
+stream
+BT
+/F1 9 Tf
+50 782.0 Td
+(    Design: Almost matching text) Tj
+50 769.0 Td
+(    Example:) Tj
+50 756.0 Td
+(      Text:    "AAAAAAAAAAAAAAAB"   \(n=16, 15 A's then B\)) Tj
+50 743.0 Td
+(      Pattern: "AAAAB"             \(m=5, 4 A's then B\)) Tj
+50 730.0 Td
+(    Result: m comparisons before mismatch or match, every alignment) Tj
+50 717.0 Td
+(    Total comparisons ~ m * \(n-m+1\) = O\(mn\)) Tj
+50 704.0 Td
+() Tj
+50 691.0 Td
+(  AVERAGE CASE:) Tj
+50 678.0 Td
+(    For random text/pattern over alphabet size |S|:) Tj
+50 665.0 Td
+(    Expected comparisons per alignment = 1 + 1/\(|S|-1\) ~ 1 for large |S|) Tj
+50 652.0 Td
+(    Total average = O\(n\)) Tj
+50 639.0 Td
+() Tj
+50 626.0 Td
+(  DELIBERATE TEST CASES:) Tj
+50 613.0 Td
+(    Test 1 - Best Case \(1 comp/alignment\):) Tj
+50 600.0 Td
+(      text    = "CCCCCCCCCCCCCCC" \(all same char not in pattern start\)) Tj
+50 587.0 Td
+(      pattern = "ACCC") Tj
+50 574.0 Td
+(      Expected: \(n-m+1\) comparisons) Tj
+50 561.0 Td
+() Tj
+50 548.0 Td
+(    Test 2 - Worst Case \(full scan per alignment\):) Tj
+50 535.0 Td
+(      text    = "AAAAAAAAAAAAAAAB") Tj
+50 522.0 Td
+(      pattern = "AAAAB") Tj
+50 509.0 Td
+(      Expected: \(n-m+1\)*m comparisons) Tj
+50 496.0 Td
+() Tj
+50 483.0 Td
+(    Test 3 - Multiple Occurrences:) Tj
+50 470.0 Td
+(      text    = "ABCABCABCABC") Tj
+50 457.0 Td
+(      pattern = "ABC") Tj
+50 444.0 Td
+(      Returns all positions, counts total comparisons) Tj
+50 431.0 Td
+() Tj
+50 418.0 Td
+() Tj
+50 405.0 Td
+(COMPLEXITY ANALYSIS) Tj
+50 392.0 Td
+(====================) Tj
+50 379.0 Td
+(  Best Case   : O\(n\)   -- 1 comparison per shift) Tj
+50 366.0 Td
+(  Average Case: O\(n\)   -- over random text) Tj
+50 353.0 Td
+(  Worst Case  : O\(mn\)  -- nearly-matching text, pattern mismatches at end) Tj
+50 340.0 Td
+() Tj
+50 327.0 Td
+(  For security log screening \(n=100,000 chars, m=10 char pattern\):) Tj
+50 314.0 Td
+(  - Best case:  ~100,000 comparisons) Tj
+50 301.0 Td
+(  - Worst case: ~1,000,000 comparisons) Tj
+50 288.0 Td
+(  - For high-frequency screening, KMP \(O\(n\)\) would be preferred.) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 5 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000121 00000 n 
+0000000189 00000 n 
+0000003273 00000 n 
+0000005383 00000 n 
+0000005509 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+5635
+%%EOF

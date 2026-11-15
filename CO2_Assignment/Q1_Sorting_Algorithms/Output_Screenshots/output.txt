@@ -1,0 +1,141 @@
+
+============================================================
+  DEMO RUN – Small Dataset (n=10)
+============================================================
+  Input:    [64, 34, 25, 12, 22, 11, 90, 45, 67, 3]
+
+  Selection Sort Result: [3, 11, 12, 22, 25, 34, 45, 64, 67, 90]
+    Comparisons: 45,  Swaps: 6
+
+  Bubble Sort Result:    [3, 11, 12, 22, 25, 34, 45, 64, 67, 90]
+    Comparisons: 45,  Swaps: 26
+
+  Insertion Sort Result: [3, 11, 12, 22, 25, 34, 45, 64, 67, 90]
+    Comparisons: 30,  Swaps: 26
+
+====================================================================================================
+Q1 – SORTING ALGORITHMS: COMPARISON COUNT ANALYSIS
+Student: HRUZHEECAYSHAN T K | Reg No: 192573021
+====================================================================================================
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+  DATA CONDITION: Random
+────────────────────────────────────────────────────────────────────────────────────────────────────
+         n |         Selection Sort |            Bubble Sort |         Insertion Sort
+  ─────────|────────────────────────|────────────────────────|───────────────────────
+       100 |          4,950 ( 0.09ms) |          4,898 ( 0.18ms) |          2,522 ( 0.08ms)
+       500 |        124,750 ( 2.42ms) |        124,597 ( 4.33ms) |         63,632 ( 2.12ms)
+      1000 |        499,500 ( 9.17ms) |        498,713 (17.68ms) |        245,031 ( 8.49ms)
+      2000 |      1,999,000 (37.28ms) |      1,996,396 (74.64ms) |        998,557 (35.47ms)
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+  DATA CONDITION: Sorted
+────────────────────────────────────────────────────────────────────────────────────────────────────
+         n |         Selection Sort |            Bubble Sort |         Insertion Sort
+  ─────────|────────────────────────|────────────────────────|───────────────────────
+       100 |          4,950 ( 0.08ms) |             99 ( 0.00ms) |             99 ( 0.00ms)
+       500 |        124,750 ( 2.18ms) |            499 ( 0.01ms) |            499 ( 0.02ms)
+      1000 |        499,500 ( 9.03ms) |            999 ( 0.02ms) |            999 ( 0.04ms)
+      2000 |      1,999,000 (36.50ms) |          1,999 ( 0.04ms) |          1,999 ( 0.08ms)
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+  DATA CONDITION: Reverse Sorted
+────────────────────────────────────────────────────────────────────────────────────────────────────
+         n |         Selection Sort |            Bubble Sort |         Insertion Sort
+  ─────────|────────────────────────|────────────────────────|───────────────────────
+       100 |          4,950 ( 0.08ms) |          4,950 ( 0.19ms) |          4,950 ( 0.16ms)
+       500 |        124,750 ( 2.33ms) |        124,750 ( 5.08ms) |        124,750 ( 3.94ms)
+      1000 |        499,500 ( 9.74ms) |        499,500 (21.54ms) |        499,500 (16.67ms)
+      2000 |      1,999,000 (38.49ms) |      1,999,000 (87.89ms) |      1,999,000 (68.46ms)
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+  DATA CONDITION: Nearly Sorted
+────────────────────────────────────────────────────────────────────────────────────────────────────
+         n |         Selection Sort |            Bubble Sort |         Insertion Sort
+  ─────────|────────────────────────|────────────────────────|───────────────────────
+       100 |          4,950 ( 0.08ms) |          4,048 ( 0.09ms) |            865 ( 0.03ms)
+       500 |        124,750 ( 2.19ms) |        123,714 ( 2.67ms) |         14,741 ( 0.47ms)
+      1000 |        499,500 ( 9.07ms) |        492,594 (11.72ms) |         56,360 ( 1.96ms)
+      2000 |      1,999,000 (37.25ms) |      1,991,703 (49.61ms) |        237,925 ( 8.45ms)
+
+====================================================================================================
+  THEORETICAL vs ACTUAL COMPARISON COUNT (n=1000, Worst/Random Case)
+====================================================================================================
+  Selection Sort theoretical: n(n-1)/2 = 499,500
+  Selection Sort actual (random, n=1000): 499,500
+  Match: ✓ EXACT
+
+  Bubble Sort worst case theoretical: n(n-1)/2 = 499,500
+  Bubble Sort actual (reverse, n=1000): 499,500
+
+  Insertion Sort worst case theoretical: n(n-1)/2 = 499,500
+  Insertion Sort actual (reverse, n=1000): 499,500
+
+====================================================================================================
+  MATHEMATICAL COMPLEXITY DERIVATION
+====================================================================================================
+
+  Selection Sort:
+    Comparison count = Σ(i=0 to n-2) (n-1-i)
+                     = (n-1) + (n-2) + ... + 1
+                     = n(n-1)/2
+    → T(n) = n(n-1)/2 ∈ Θ(n²) for ALL input cases
+
+  Bubble Sort:
+    Worst case (reverse sorted):
+      Comparison count = Σ(i=0 to n-2) (n-1-i) = n(n-1)/2 ∈ Θ(n²)
+    Best case (already sorted):
+      With early termination: n-1 comparisons ∈ Θ(n)
+    Average case: n(n-1)/4 ∈ Θ(n²)
+
+  Insertion Sort:
+    Worst case (reverse sorted):
+      Comparison count = Σ(i=1 to n-1) i = n(n-1)/2 ∈ Θ(n²)
+    Best case (already sorted):
+      1 comparison per element: n-1 ∈ Θ(n)
+    Average case: n(n-1)/4 ∈ Θ(n²)
+
+  KEY INSIGHT: All three are Θ(n²) on average, but Insertion Sort and Bubble Sort
+  degrade gracefully toward O(n) as input becomes more ordered.
+    
+
+====================================================================================================
+  ENGINEERING RECOMMENDATION
+====================================================================================================
+
+  Context: Emergency dispatch priority score sorting system.
+
+  ANALYSIS:
+  ┌─────────────────┬────────────────┬──────────────────────────────────────────────────┐
+  │ Algorithm       │ Best Scenario  │ Recommendation                                   │
+  ├─────────────────┼────────────────┼──────────────────────────────────────────────────┤
+  │ Selection Sort  │ Fixed O(n²)    │ AVOID – no benefit from partially sorted data    │
+  │ Bubble Sort     │ Already sorted │ ACCEPTABLE only for near-sorted, tiny datasets   │
+  │ Insertion Sort  │ Nearly sorted  │ BEST CHOICE for emergency dispatch system        │
+  └─────────────────┴────────────────┴──────────────────────────────────────────────────┘
+
+  RECOMMENDATION: Use INSERTION SORT for the emergency dispatch system.
+  Reasoning:
+  1. Emergency data is frequently NEARLY SORTED (recent events, priority updates)
+  2. Insertion Sort achieves O(n) for sorted/nearly-sorted → minimal overhead
+  3. Insertion Sort is STABLE – preserves original order for equal-priority items
+  4. Insertion Sort is ADAPTIVE – performance scales with actual disorder level
+  5. For large-scale systems (n > 10,000), migrate to merge sort or timsort (O(n log n))
+    
+
+====================================================================================================
+  PERFORMANCE COMPARISON TABLE (n=1000)
+====================================================================================================
+
+  Algorithm                     Random          Sorted         Reverse   Nearly Sorted
+  ──────────────────── ─────────────── ─────────────── ─────────────── ───────────────
+  Selection Sort               499,500         499,500         499,500         499,500
+  Bubble Sort                  498,713             999         499,500         492,594
+  Insertion Sort               245,031             999         499,500          56,360
+
+  OBSERVATIONS:
+  1. Selection Sort: Exactly 499,500 comparisons for ALL conditions (truly O(n²))
+  2. Bubble Sort: 999 comparisons when already sorted (O(n)), ~499,500 when reversed
+  3. Insertion Sort: n-1=999 comparisons when sorted, ~499,500 when reversed
+  4. For nearly sorted: Insertion Sort makes far fewer comparisons → best adaptive choice
+    

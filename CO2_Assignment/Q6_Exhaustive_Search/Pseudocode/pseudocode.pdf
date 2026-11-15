@@ -1,0 +1,330 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [7 0 R 8 0 R 9 0 R] /Count 3 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+4 0 obj
+<< /Length 2799 >>
+stream
+BT
+/F1 9 Tf
+50 762.0 Td
+(================================================================================) Tj
+50 749.0 Td
+(  Q6 Exhaustive Search) Tj
+50 736.0 Td
+(  Student: HRUZHEECAYSHAN T K  |  Reg No: 192573021) Tj
+50 723.0 Td
+(  CO2 Assignment - Design and Analysis of Algorithms) Tj
+50 710.0 Td
+(================================================================================) Tj
+50 697.0 Td
+() Tj
+50 684.0 Td
+(Q6 - Exhaustive Search: Humanitarian Airlift Planning \(8 Marks\)) Tj
+50 671.0 Td
+(================================================================) Tj
+50 658.0 Td
+(Problem: Helicopter has payload limit W. Select packages to maximise) Tj
+50 645.0 Td
+(humanitarian value without exceeding weight limit.) Tj
+50 632.0 Td
+() Tj
+50 619.0 Td
+(Package Data:) Tj
+50 606.0 Td
+(  ID | Weight | Humanitarian Value) Tj
+50 593.0 Td
+(   1 |   2 kg |   6) Tj
+50 580.0 Td
+(   2 |   3 kg |   7) Tj
+50 567.0 Td
+(   3 |   4 kg |   8) Tj
+50 554.0 Td
+(   4 |   5 kg |   9) Tj
+50 541.0 Td
+(   5 |   1 kg |   3) Tj
+50 528.0 Td
+(  Payload limit W = 8 kg) Tj
+50 515.0 Td
+() Tj
+50 502.0 Td
+() Tj
+50 489.0 Td
+(REPRESENTATION OF CANDIDATES) Tj
+50 476.0 Td
+(==============================) Tj
+50 463.0 Td
+(  Each candidate solution is a BINARY VECTOR of length n:) Tj
+50 450.0 Td
+(    x = [x_1, x_2, ..., x_n]  where x_i in {0, 1}) Tj
+50 437.0 Td
+(    x_i = 1 means package i is selected) Tj
+50 424.0 Td
+(    x_i = 0 means package i is excluded) Tj
+50 411.0 Td
+() Tj
+50 398.0 Td
+(  Total candidates = 2^n subsets \(including empty set\)) Tj
+50 385.0 Td
+(  For n=5: 2^5 = 32 candidate combinations) Tj
+50 372.0 Td
+() Tj
+50 359.0 Td
+() Tj
+50 346.0 Td
+(ALGORITHM: ExhaustiveKnapsack\(packages, W\)) Tj
+50 333.0 Td
+(-------------------------------------------) Tj
+50 320.0 Td
+(// Enumerate ALL 2^n subsets and find the feasible one with max value) Tj
+50 307.0 Td
+(// Input : List of \(weight, value\) pairs, capacity W) Tj
+50 294.0 Td
+(// Output: Best subset, max value, total combinations examined) Tj
+50 281.0 Td
+() Tj
+50 268.0 Td
+(  n               <- LENGTH\(packages\)) Tj
+50 255.0 Td
+(  total_subsets   <- 2^n) Tj
+50 242.0 Td
+(  best_value      <- 0) Tj
+50 229.0 Td
+(  best_subset     <- empty) Tj
+50 216.0 Td
+(  combos_examined <- 0) Tj
+50 203.0 Td
+() Tj
+50 190.0 Td
+(  FOR mask <- 0 TO total_subsets - 1 DO) Tj
+50 177.0 Td
+(      combos_examined <- combos_examined + 1) Tj
+50 164.0 Td
+(      current_weight  <- 0) Tj
+50 151.0 Td
+(      current_value   <- 0) Tj
+50 138.0 Td
+() Tj
+50 125.0 Td
+(      FOR i <- 0 TO n-1 DO) Tj
+50 112.0 Td
+(          IF BIT\(mask, i\) = 1 THEN   // Package i is selected) Tj
+50 99.0 Td
+(              current_weight <- current_weight + packages[i].weight) Tj
+50 86.0 Td
+(              current_value  <- current_value  + packages[i].value) Tj
+50 73.0 Td
+(          END IF) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 2926 >>
+stream
+BT
+/F1 9 Tf
+50 782.0 Td
+(      END FOR) Tj
+50 769.0 Td
+() Tj
+50 756.0 Td
+(      IF current_weight <= W THEN    // Feasibility check) Tj
+50 743.0 Td
+(          IF current_value > best_value THEN) Tj
+50 730.0 Td
+(              best_value  <- current_value) Tj
+50 717.0 Td
+(              best_subset <- DECODE_MASK\(mask, n\)) Tj
+50 704.0 Td
+(          END IF) Tj
+50 691.0 Td
+(      END IF) Tj
+50 678.0 Td
+(  END FOR) Tj
+50 665.0 Td
+() Tj
+50 652.0 Td
+(  RETURN best_subset, best_value, combos_examined) Tj
+50 639.0 Td
+() Tj
+50 626.0 Td
+(Step-by-Step Logic:) Tj
+50 613.0 Td
+(  1. Represent each subset as a binary number \(mask\) from 0 to 2^n-1.) Tj
+50 600.0 Td
+(  2. Bit i of mask = 1 means package i is included.) Tj
+50 587.0 Td
+(  3. For each mask: compute total weight and total value of selected packages.) Tj
+50 574.0 Td
+(  4. Feasibility check: total weight <= payload limit W.) Tj
+50 561.0 Td
+(  5. If feasible and value > best seen so far: update best.) Tj
+50 548.0 Td
+(  6. After all 2^n subsets: return the best feasible subset.) Tj
+50 535.0 Td
+() Tj
+50 522.0 Td
+() Tj
+50 509.0 Td
+(HOW CANDIDATE SOLUTIONS ARE GENERATED) Tj
+50 496.0 Td
+(=======================================) Tj
+50 483.0 Td
+(  Binary enumeration using integer bit-masking:) Tj
+50 470.0 Td
+(    mask=0 \(000...0\) => empty set) Tj
+50 457.0 Td
+(    mask=1 \(000...1\) => {package_0}) Tj
+50 444.0 Td
+(    mask=2 \(000...10\) => {package_1}) Tj
+50 431.0 Td
+(    mask=3 \(000...11\) => {package_0, package_1}) Tj
+50 418.0 Td
+(    ... and so on up to mask=2^n-1 \(all packages selected\)) Tj
+50 405.0 Td
+() Tj
+50 392.0 Td
+() Tj
+50 379.0 Td
+(CORRECTNESS VERIFICATION \(Small Instance\)) Tj
+50 366.0 Td
+(==========================================) Tj
+50 353.0 Td
+(  Packages: [\(2,6\),\(3,7\),\(4,8\)], W=5) Tj
+50 340.0 Td
+(  Expected: Select packages 1\(2kg,6val\) + 2\(3kg,7val\) = 5kg, value=13) Tj
+50 327.0 Td
+() Tj
+50 314.0 Td
+(  All 2^3 = 8 subsets:) Tj
+50 301.0 Td
+(    {} => weight=0, value=0  FEASIBLE) Tj
+50 288.0 Td
+(    {P1} => weight=2, value=6  FEASIBLE) Tj
+50 275.0 Td
+(    {P2} => weight=3, value=7  FEASIBLE) Tj
+50 262.0 Td
+(    {P3} => weight=4, value=8  FEASIBLE) Tj
+50 249.0 Td
+(    {P1,P2} => weight=5, value=13  FEASIBLE *** BEST ***) Tj
+50 236.0 Td
+(    {P1,P3} => weight=6, value=14  INFEASIBLE \(>5\)) Tj
+50 223.0 Td
+(    {P2,P3} => weight=7, value=15  INFEASIBLE) Tj
+50 210.0 Td
+(    {P1,P2,P3} => weight=9, value=21  INFEASIBLE) Tj
+50 197.0 Td
+(  Optimal: {P1,P2}, value=13  [verified independently]) Tj
+50 184.0 Td
+() Tj
+50 171.0 Td
+() Tj
+50 158.0 Td
+(EXPONENTIAL GROWTH INVESTIGATION) Tj
+50 145.0 Td
+(==================================) Tj
+50 132.0 Td
+(  Number of candidates = 2^n) Tj
+50 119.0 Td
+() Tj
+50 106.0 Td
+(    n  | Candidates     | Ratio \(vs n-1\)) Tj
+50 93.0 Td
+(  -----+----------------+---------------) Tj
+50 80.0 Td
+(    5  |           32   |   --) Tj
+50 67.0 Td
+(   10  |        1,024   |  2x per package) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Length 1579 >>
+stream
+BT
+/F1 9 Tf
+50 782.0 Td
+(   15  |       32,768   |  2x per package) Tj
+50 769.0 Td
+(   20  |    1,048,576   |  2x per package) Tj
+50 756.0 Td
+(   25  |   33,554,432   |  2x per package) Tj
+50 743.0 Td
+(   30  |1,073,741,824   |  2x per package) Tj
+50 730.0 Td
+() Tj
+50 717.0 Td
+(  WHY ADDING ONE PACKAGE CAUSES DRAMATIC GROWTH:) Tj
+50 704.0 Td
+(    Adding one package to a set of n packages doubles the solution space) Tj
+50 691.0 Td
+(    because every existing subset can now either include or exclude the) Tj
+50 678.0 Td
+(    new package. This is binary branching at every step, giving 2^n growth.) Tj
+50 665.0 Td
+(    For example: going from n=25 to n=26 adds 33 MILLION new candidates.) Tj
+50 652.0 Td
+(    This exponential growth is unavoidable for exhaustive enumeration.) Tj
+50 639.0 Td
+() Tj
+50 626.0 Td
+() Tj
+50 613.0 Td
+(DEPLOYMENT DECISION) Tj
+50 600.0 Td
+(====================) Tj
+50 587.0 Td
+(  Fixed response time: 5 seconds \(justified: emergency context needs fast decision\)) Tj
+50 574.0 Td
+(  Experimental results \(approximate candidates per second\):) Tj
+50 561.0 Td
+(    ~1,000,000 subsets/second \(Python\), ~100,000,000/second \(compiled C\)) Tj
+50 548.0 Td
+() Tj
+50 535.0 Td
+(  Using Python benchmark:) Tj
+50 522.0 Td
+(    n=20: 1,048,576 subsets in ~1 second   [SAFE to deploy]) Tj
+50 509.0 Td
+(    n=25: 33,554,432 subsets in ~33 seconds [EXCEEDS 5-sec limit]) Tj
+50 496.0 Td
+() Tj
+50 483.0 Td
+(  DEPLOYMENT BOUNDARY: n <= 23 packages for 5-second response time.) Tj
+50 470.0 Td
+(  For larger n, recommend Branch-and-Bound or Dynamic Programming.) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 5 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 6 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000127 00000 n 
+0000000195 00000 n 
+0000003046 00000 n 
+0000006024 00000 n 
+0000007655 00000 n 
+0000007781 00000 n 
+0000007907 00000 n 
+trailer
+<< /Size 10 /Root 1 0 R >>
+startxref
+8033
+%%EOF

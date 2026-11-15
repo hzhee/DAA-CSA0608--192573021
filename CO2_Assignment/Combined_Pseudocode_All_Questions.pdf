@@ -1,0 +1,582 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [12 0 R 13 0 R 14 0 R 15 0 R 16 0 R 17 0 R 18 0 R] /Count 7 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier-Bold >>
+endobj
+5 0 obj
+<< /Length 3510 >>
+stream
+BT /F1 8.5 Tf
+/F2 11 Tf
+45 785.0 Td (=============================================================================) Tj
+/F1 8.5 Tf
+45 773.0 Td (CO2 ASSIGNMENT ? COMBINED PSEUDOCODE DOCUMENT \(Q1 to Q7\)) Tj
+/F2 11 Tf
+45 761.0 Td (=============================================================================) Tj
+/F1 8.5 Tf
+45 749.0 Td (Student  : HRUZHEECAYSHAN T K) Tj
+45 737.0 Td (Reg No   : 192573021) Tj
+45 725.0 Td (Subject  : Design and Analysis of Algorithms \(DAA-CSA0608\)) Tj
+45 713.0 Td (Coverage : Brute-Force and Exhaustive-Search Techniques) Tj
+/F2 11 Tf
+45 701.0 Td (=============================================================================) Tj
+/F1 8.5 Tf
+45 689.0 Td () Tj
+45 677.0 Td () Tj
+/F2 11 Tf
+45 665.0 Td (=============================================================================) Tj
+/F1 8.5 Tf
+/F2 11 Tf
+45 653.0 Td (Q1 ? SORTING UNDER DIFFERENT DATA CONDITIONS  \(6 Marks\)) Tj
+/F1 8.5 Tf
+/F2 11 Tf
+45 641.0 Td (=============================================================================) Tj
+/F1 8.5 Tf
+45 629.0 Td () Tj
+45 617.0 Td (ALGORITHM 1: SelectionSort\(A[0..n-1]\)) Tj
+45 605.0 Td (---------------------------------------) Tj
+45 593.0 Td (// Sort by repeatedly selecting the minimum element.) Tj
+45 581.0 Td (// Input: Array A of n elements | Output: Sorted A, comparison count) Tj
+45 569.0 Td () Tj
+45 557.0 Td (  comparisons <- 0) Tj
+45 545.0 Td (  FOR i <- 0 TO n-2 DO) Tj
+45 533.0 Td (      min_idx <- i) Tj
+45 521.0 Td (      FOR j <- i+1 TO n-1 DO) Tj
+45 509.0 Td (          comparisons <- comparisons + 1) Tj
+45 497.0 Td (          IF A[j] < A[min_idx] THEN  min_idx <- j  END IF) Tj
+45 485.0 Td (      END FOR) Tj
+45 473.0 Td (      IF min_idx != i THEN  SWAP\(A[i], A[min_idx]\)  END IF) Tj
+45 461.0 Td (  END FOR) Tj
+45 449.0 Td (  RETURN A, comparisons) Tj
+45 437.0 Td () Tj
+45 425.0 Td (Step-by-Step Logic:) Tj
+45 413.0 Td (  1. Assume first element of unsorted portion is minimum.) Tj
+45 401.0 Td (  2. Scan remaining unsorted elements \(inner loop, n-1-i comparisons\).) Tj
+45 389.0 Td (  3. After full scan, swap minimum element to front of unsorted portion.) Tj
+45 377.0 Td (  4. Advance boundary: unsorted portion shrinks by 1.) Tj
+45 365.0 Td (  5. Repeat n-1 times until entire array is sorted.) Tj
+45 353.0 Td () Tj
+45 341.0 Td (Complexity: Best=O\(n^2\) | Average=O\(n^2\) | Worst=O\(n^2\)) Tj
+45 329.0 Td (Mathematical: Comparisons = n\(n-1\)/2 always \(e.g. n=1000 -> 499,500\)) Tj
+45 317.0 Td (Characteristic: NOT adaptive ? always O\(n^2\) regardless of input order.) Tj
+45 305.0 Td () Tj
+45 293.0 Td () Tj
+45 281.0 Td (ALGORITHM 2: BubbleSort\(A[0..n-1]\)) Tj
+45 269.0 Td (------------------------------------) Tj
+45 257.0 Td (// Sort by repeatedly swapping adjacent out-of-order elements.) Tj
+45 245.0 Td () Tj
+45 233.0 Td (  comparisons <- 0) Tj
+45 221.0 Td (  FOR i <- 0 TO n-2 DO) Tj
+45 209.0 Td (      swapped <- FALSE) Tj
+45 197.0 Td (      FOR j <- 0 TO n-2-i DO) Tj
+45 185.0 Td (          comparisons <- comparisons + 1) Tj
+45 173.0 Td (          IF A[j] > A[j+1] THEN) Tj
+45 161.0 Td (              SWAP\(A[j], A[j+1]\)) Tj
+45 149.0 Td (              swapped <- TRUE) Tj
+45 137.0 Td (          END IF) Tj
+45 125.0 Td (      END FOR) Tj
+45 113.0 Td (      IF NOT swapped THEN BREAK  END IF     // Early termination) Tj
+45 101.0 Td (  END FOR) Tj
+45 89.0 Td (  RETURN A, comparisons) Tj
+45 77.0 Td () Tj
+45 65.0 Td (Step-by-Step Logic:) Tj
+45 53.0 Td (  1. Each pass bubbles the largest unsorted element to its final position.) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Length 3602 >>
+stream
+BT /F1 8.5 Tf
+45 785.0 Td (  2. Compare every adjacent pair; swap if left > right.) Tj
+45 773.0 Td (  3. If no swap occurs in a full pass => array sorted => stop early.) Tj
+45 761.0 Td () Tj
+45 749.0 Td (Complexity: Best=O\(n\) [sorted] | Average=O\(n^2\) | Worst=O\(n^2\) [reversed]) Tj
+45 737.0 Td (Characteristic: IS adaptive ? benefits from nearly-sorted input.) Tj
+45 725.0 Td () Tj
+45 713.0 Td () Tj
+45 701.0 Td (ALGORITHM 3: InsertionSort\(A[0..n-1]\)) Tj
+45 689.0 Td (---------------------------------------) Tj
+45 677.0 Td (// Sort by inserting each element into its correct sorted position.) Tj
+45 665.0 Td () Tj
+45 653.0 Td (  comparisons <- 0) Tj
+45 641.0 Td (  FOR i <- 1 TO n-1 DO) Tj
+45 629.0 Td (      key <- A[i]) Tj
+45 617.0 Td (      j   <- i - 1) Tj
+45 605.0 Td (      WHILE j >= 0 AND A[j] > key DO) Tj
+45 593.0 Td (          comparisons <- comparisons + 1) Tj
+45 581.0 Td (          A[j+1] <- A[j]) Tj
+45 569.0 Td (          j <- j - 1) Tj
+45 557.0 Td (      END WHILE) Tj
+45 545.0 Td (      IF j >= 0 THEN comparisons <- comparisons + 1 END IF) Tj
+45 533.0 Td (      A[j+1] <- key) Tj
+45 521.0 Td (  END FOR) Tj
+45 509.0 Td (  RETURN A, comparisons) Tj
+45 497.0 Td () Tj
+45 485.0 Td (Step-by-Step Logic:) Tj
+45 473.0 Td (  1. Treat A[0] as a one-element sorted sub-array.) Tj
+45 461.0 Td (  2. Pick next element \(key\); walk backwards through sorted portion.) Tj
+45 449.0 Td (  3. Shift all elements greater than key one position right.) Tj
+45 437.0 Td (  4. Insert key into the gap. Sorted portion grows by 1. Repeat.) Tj
+45 425.0 Td () Tj
+45 413.0 Td (Complexity: Best=O\(n\) [sorted] | Average=O\(n^2\) | Worst=O\(n^2\) [reversed]) Tj
+45 401.0 Td (Characteristic: Most adaptive of the three ? excellent for nearly-sorted data.) Tj
+45 389.0 Td () Tj
+45 377.0 Td (COMPLEXITY TABLE:) Tj
+45 365.0 Td (  Algorithm     | Best   | Average | Worst  | Stable | Adaptive) Tj
+45 353.0 Td (  --------------+--------+---------+--------+--------+---------) Tj
+45 341.0 Td (  Selection     | O\(n^2\) | O\(n^2\)  | O\(n^2\) | No     | No) Tj
+45 329.0 Td (  Bubble        | O\(n\)   | O\(n^2\)  | O\(n^2\) | Yes    | Yes) Tj
+45 317.0 Td (  Insertion     | O\(n\)   | O\(n^2\)  | O\(n^2\) | Yes    | Yes) Tj
+45 305.0 Td () Tj
+45 293.0 Td (MATHEMATICAL DERIVATION:) Tj
+45 281.0 Td (  Selection Sort:  Comparisons = SUM\(i=0 to n-2\)\(n-1-i\) = n\(n-1\)/2) Tj
+45 269.0 Td (  Bubble worst:    Comparisons = n\(n-1\)/2  \(same sum\)) Tj
+45 257.0 Td (  Insertion worst: Comparisons = SUM\(i=1 to n-1\) i = n\(n-1\)/2) Tj
+45 245.0 Td () Tj
+45 233.0 Td (RECOMMENDATION: Use INSERTION SORT for the emergency dispatch system.) Tj
+45 221.0 Td (  Reason: Emergency data is typically nearly-sorted \(incremental updates\).) Tj
+45 209.0 Td (  Insertion Sort achieves O\(n\) for sorted/nearly-sorted; it is STABLE and) Tj
+45 197.0 Td (  ADAPTIVE. Selection Sort is never adaptive ? always avoid for this context.) Tj
+45 185.0 Td () Tj
+45 173.0 Td () Tj
+/F2 11 Tf
+45 161.0 Td (=============================================================================) Tj
+/F1 8.5 Tf
+/F2 11 Tf
+45 149.0 Td (Q2 ? SEQUENTIAL SEARCH ENGINEERING DECISION  \(4 Marks\)) Tj
+/F1 8.5 Tf
+/F2 11 Tf
+45 137.0 Td (=============================================================================) Tj
+/F1 8.5 Tf
+45 125.0 Td () Tj
+45 113.0 Td (ALGORITHM: SequentialSearch\(A[0..n-1], target\)) Tj
+45 101.0 Td (------------------------------------------------) Tj
+45 89.0 Td (// Search for target by examining each element from left to right.) Tj
+45 77.0 Td () Tj
+45 65.0 Td (  comparisons <- 0) Tj
+45 53.0 Td (  FOR i <- 0 TO n-1 DO) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Length 3351 >>
+stream
+BT /F1 8.5 Tf
+45 785.0 Td (      comparisons <- comparisons + 1) Tj
+45 773.0 Td (      IF A[i] = target THEN) Tj
+45 761.0 Td (          RETURN i, comparisons           // Found at position i) Tj
+45 749.0 Td (      END IF) Tj
+45 737.0 Td (  END FOR) Tj
+45 725.0 Td (  RETURN -1, comparisons                 // Not found) Tj
+45 713.0 Td () Tj
+45 701.0 Td (Step-by-Step Logic:) Tj
+45 689.0 Td (  1. Start at index 0.) Tj
+45 677.0 Td (  2. Compare current element with target.) Tj
+45 665.0 Td (  3. If match: return index and stop immediately.) Tj
+45 653.0 Td (  4. If no match: advance to next element.) Tj
+45 641.0 Td (  5. If end of array reached: return -1 \(not found\).) Tj
+45 629.0 Td () Tj
+45 617.0 Td (ANALYSIS:) Tj
+45 605.0 Td (  Successful at position p: comparisons = p + 1) Tj
+45 593.0 Td (  Average successful: \(n+1\)/2 ~ n/2) Tj
+45 581.0 Td (  Unsuccessful: comparisons = n \(must check ALL elements\)) Tj
+45 569.0 Td () Tj
+45 557.0 Td (COMPLEXITY:) Tj
+45 545.0 Td (  Best = O\(1\) | Average \(success\) = O\(n\) | Worst/Unsuccessful = O\(n\)) Tj
+45 533.0 Td () Tj
+45 521.0 Td (ENGINEERING BOUNDARY:) Tj
+45 509.0 Td (  Original system \(n=100, 50 queries/day\):) Tj
+45 497.0 Td (    Daily comparisons = 50 x 100 = 5,000  =>  SEQUENTIAL SEARCH APPROPRIATE) Tj
+45 485.0 Td () Tj
+45 473.0 Td (  Changed condition \(n=10,000, 1,000 queries/day\):) Tj
+45 461.0 Td (    Sequential daily = 1,000 x 10,000 = 10,000,000) Tj
+45 449.0 Td (    Binary search daily = 1,000 x 14 = 14,000  \(log2\(10,000\) = 14\)) Tj
+45 437.0 Td (    Ratio: 10,000,000 / 14,000 = 714x overhead) Tj
+45 425.0 Td (    =>  SEQUENTIAL SEARCH NO LONGER APPROPRIATE) Tj
+45 413.0 Td () Tj
+45 401.0 Td (DECISION RULE:) Tj
+45 389.0 Td (  IF n <= 500 AND search_frequency <= 100/day => Sequential OK) Tj
+45 377.0 Td (  ELSE => Sort once O\(n log n\), then Binary Search O\(log n\) per query) Tj
+45 365.0 Td () Tj
+45 353.0 Td () Tj
+/F2 11 Tf
+45 341.0 Td (=============================================================================) Tj
+/F1 8.5 Tf
+/F2 11 Tf
+45 329.0 Td (Q3 ? BRUTE-FORCE STRING MATCHING  \(6 Marks\)) Tj
+/F1 8.5 Tf
+/F2 11 Tf
+45 317.0 Td (=============================================================================) Tj
+/F1 8.5 Tf
+45 305.0 Td () Tj
+45 293.0 Td (ALGORITHM: BruteForceStringMatch\(text[0..n-1], pattern[0..m-1]\)) Tj
+45 281.0 Td (-----------------------------------------------------------------) Tj
+45 269.0 Td (// Find all occurrences of pattern in text.) Tj
+45 257.0 Td () Tj
+45 245.0 Td (  comparisons <- 0) Tj
+45 233.0 Td (  FOR i <- 0 TO n-m DO) Tj
+45 221.0 Td (      j <- 0) Tj
+45 209.0 Td (      WHILE j < m AND text[i+j] = pattern[j] DO) Tj
+45 197.0 Td (          comparisons <- comparisons + 1) Tj
+45 185.0 Td (          j <- j + 1) Tj
+45 173.0 Td (      END WHILE) Tj
+45 161.0 Td (      IF j < m THEN comparisons <- comparisons + 1 END IF) Tj
+45 149.0 Td (      IF j = m THEN REPORT match at position i END IF) Tj
+45 137.0 Td (  END FOR) Tj
+45 125.0 Td (  RETURN comparisons) Tj
+45 113.0 Td () Tj
+45 101.0 Td (Step-by-Step Logic:) Tj
+45 89.0 Td (  1. Align pattern at position i=0 in the text.) Tj
+45 77.0 Td (  2. Compare characters left-to-right until mismatch or full match.) Tj
+45 65.0 Td (  3. If all m characters match: pattern found at index i.) Tj
+45 53.0 Td (  4. If mismatch: shift pattern one position right \(i <- i+1\).) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Length 3330 >>
+stream
+BT /F1 8.5 Tf
+45 785.0 Td (  5. Repeat for all valid alignment positions \(0 to n-m\).) Tj
+45 773.0 Td () Tj
+45 761.0 Td (ENGINEERING THE THREE CASES:) Tj
+45 749.0 Td () Tj
+45 737.0 Td (  BEST CASE ? 1 comparison per alignment \(O\(n\)\):) Tj
+45 725.0 Td (    Design: First char of pattern absent from text.) Tj
+45 713.0 Td (    Text: "CCCCCCCCCCCCC"  Pattern: "BCCC") Tj
+45 701.0 Td (    Each alignment fails on first character => n-m+1 total comparisons.) Tj
+45 689.0 Td () Tj
+45 677.0 Td (  WORST CASE ? m comparisons per alignment \(O\(mn\)\):) Tj
+45 665.0 Td (    Design: Near-match text; mismatch only on last character.) Tj
+45 653.0 Td (    Text: "AAAAAAAAAB"  Pattern: "AAAAB") Tj
+45 641.0 Td (    Total comparisons = \(n-m+1\) x m.) Tj
+45 629.0 Td () Tj
+45 617.0 Td (  AVERAGE CASE ? ~1 comparison per alignment \(O\(n\)\):) Tj
+45 605.0 Td (    Over large alphabet: probability of matching first char = 1/|alphabet|.) Tj
+45 593.0 Td (    For ASCII logs \(95 printable chars\): expected 1.01 comps per alignment.) Tj
+45 581.0 Td () Tj
+45 569.0 Td (COMPLEXITY SUMMARY:) Tj
+45 557.0 Td (  Best/Average: O\(n\) | Worst: O\(mn\)) Tj
+45 545.0 Td (  Real-world security logs \(large alphabet\) => average behaviour = O\(n\).) Tj
+45 533.0 Td () Tj
+45 521.0 Td () Tj
+/F2 11 Tf
+45 509.0 Td (=============================================================================) Tj
+/F1 8.5 Tf
+/F2 11 Tf
+45 497.0 Td (Q4 ? BRUTE-FORCE CLOSEST PAIR OF POINTS  \(6 Marks\)) Tj
+/F1 8.5 Tf
+/F2 11 Tf
+45 485.0 Td (=============================================================================) Tj
+/F1 8.5 Tf
+45 473.0 Td () Tj
+45 461.0 Td (ALGORITHM: BruteForceClosestPair\(P[0..n-1]\)) Tj
+45 449.0 Td (---------------------------------------------) Tj
+45 437.0 Td (// Find the pair of points with minimum Euclidean distance.) Tj
+45 425.0 Td () Tj
+45 413.0 Td (  min_dist   <- INFINITY) Tj
+45 401.0 Td (  pair       <- \(-1, -1\)) Tj
+45 389.0 Td (  dist_calcs <- 0) Tj
+45 377.0 Td () Tj
+45 365.0 Td (  FOR i <- 0 TO n-2 DO) Tj
+45 353.0 Td (      FOR j <- i+1 TO n-1 DO) Tj
+45 341.0 Td (          dist_calcs <- dist_calcs + 1) Tj
+45 329.0 Td (          d <- SQRT\(\(P[i].x - P[j].x\)^2 + \(P[i].y - P[j].y\)^2\)) Tj
+45 317.0 Td (          IF d < min_dist THEN) Tj
+45 305.0 Td (              min_dist <- d) Tj
+45 293.0 Td (              pair     <- \(i, j\)) Tj
+45 281.0 Td (          END IF) Tj
+45 269.0 Td (      END FOR) Tj
+45 257.0 Td (  END FOR) Tj
+45 245.0 Td (  RETURN pair, min_dist, dist_calcs) Tj
+45 233.0 Td () Tj
+45 221.0 Td (Step-by-Step Logic:) Tj
+45 209.0 Td (  1. Initialise min_dist = infinity.) Tj
+45 197.0 Td (  2. Use i < j to consider each unordered pair exactly once.) Tj
+45 185.0 Td (  3. For each pair compute Euclidean distance d\(P_i, P_j\).) Tj
+45 173.0 Td (  4. If d < current minimum: update minimum and record pair.) Tj
+45 161.0 Td (  5. After ALL pairs examined: return closest pair and distance.) Tj
+45 149.0 Td () Tj
+45 137.0 Td (CANDIDATE REPRESENTATION:) Tj
+45 125.0 Td (  Each candidate = unordered pair {i,j}, i < j.) Tj
+45 113.0 Td (  Total = C\(n,2\) = n\(n-1\)/2.) Tj
+45 101.0 Td (  n=10: 45 | n=100: 4,950 | n=1000: 499,500) Tj
+45 89.0 Td () Tj
+45 77.0 Td (COMPLEXITY:) Tj
+45 65.0 Td (  T\(n\) = n\(n-1\)/2 in Theta\(n^2\)) Tj
+45 53.0 Td (  When n doubles: calculations quadruple \(confirmed O\(n^2\)\).) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Length 3739 >>
+stream
+BT /F1 8.5 Tf
+45 785.0 Td (  n doubles 100->200: 4,950->19,900 = 4.02x  VERIFIED.) Tj
+45 773.0 Td () Tj
+45 761.0 Td (LIMITATION: O\(n^2\) is impractical for n > 100,000 drones.) Tj
+45 749.0 Td (  Improvement: Divide-and-Conquer Closest Pair -> O\(n log n\).) Tj
+45 737.0 Td () Tj
+45 725.0 Td () Tj
+/F2 11 Tf
+45 713.0 Td (=============================================================================) Tj
+/F1 8.5 Tf
+/F2 11 Tf
+45 701.0 Td (Q5 ? BRUTE-FORCE CONVEX HULL  \(7 Marks\)) Tj
+/F1 8.5 Tf
+/F2 11 Tf
+45 689.0 Td (=============================================================================) Tj
+/F1 8.5 Tf
+45 677.0 Td () Tj
+45 665.0 Td (GEOMETRIC TEST:) Tj
+45 653.0 Td (  For directed edge P_i -> P_j and test point P_k:) Tj
+45 641.0 Td (    cross = \(P_j.x - P_i.x\)\(P_k.y - P_i.y\) - \(P_j.y - P_i.y\)\(P_k.x - P_i.x\)) Tj
+45 629.0 Td (    cross > 0 => P_k LEFT of edge | cross < 0 => P_k RIGHT | cross=0 => collinear) Tj
+45 617.0 Td () Tj
+45 605.0 Td (ALGORITHM: BruteForceConvexHull\(P[0..n-1]\)) Tj
+45 593.0 Td (--------------------------------------------) Tj
+45 581.0 Td (// Find all directed edges that form the convex hull boundary.) Tj
+45 569.0 Td () Tj
+45 557.0 Td (  hull_edges  <- empty set) Tj
+45 545.0 Td (  edge_checks <- 0) Tj
+45 533.0 Td () Tj
+45 521.0 Td (  FOR i <- 0 TO n-1 DO) Tj
+45 509.0 Td (      FOR j <- 0 TO n-1 DO) Tj
+45 497.0 Td (          IF i = j THEN CONTINUE END IF) Tj
+45 485.0 Td (          all_same_side <- TRUE) Tj
+45 473.0 Td (          sign          <- 0) Tj
+45 461.0 Td () Tj
+45 449.0 Td (          FOR k <- 0 TO n-1 DO) Tj
+45 437.0 Td (              IF k = i OR k = j THEN CONTINUE END IF) Tj
+45 425.0 Td (              edge_checks <- edge_checks + 1) Tj
+45 413.0 Td (              cross <- \(P[j].x-P[i].x\)\(P[k].y-P[i].y\) - \(P[j].y-P[i].y\)\(P[k].x-P[i].x\)) Tj
+45 401.0 Td (              IF cross != 0 THEN) Tj
+45 389.0 Td (                  s <- SIGN\(cross\)) Tj
+45 377.0 Td (                  IF sign = 0 THEN sign <- s) Tj
+45 365.0 Td (                  ELSE IF s != sign THEN all_same_side <- FALSE; BREAK) Tj
+45 353.0 Td (                  END IF) Tj
+45 341.0 Td (              END IF) Tj
+45 329.0 Td (          END FOR) Tj
+45 317.0 Td (          IF all_same_side THEN ADD \(i,j\) TO hull_edges END IF) Tj
+45 305.0 Td (      END FOR) Tj
+45 293.0 Td (  END FOR) Tj
+45 281.0 Td (  RETURN UNIQUE_VERTICES\(hull_edges\), edge_checks) Tj
+45 269.0 Td () Tj
+45 257.0 Td (CORRECTNESS ARGUMENT \(Geometric Reasoning\):) Tj
+45 245.0 Td (  An edge \(P_i -> P_j\) lies on the convex hull if and only if ALL other) Tj
+45 233.0 Td (  points lie on the SAME SIDE of the directed line P_i->P_j.) Tj
+45 221.0 Td () Tj
+45 209.0 Td (  WHY: The convex hull is the smallest convex polygon containing all points.) Tj
+45 197.0 Td (  By convexity, every hull edge must have ALL points on one interior side.) Tj
+45 185.0 Td (  If even ONE point is on the opposite side, the polygon is non-convex there) Tj
+45 173.0 Td (  -- a contradiction. The cross product sign reveals which side P_k is on.) Tj
+45 161.0 Td (  Same sign for all k => all points on one side => valid hull edge.) Tj
+45 149.0 Td (  This is a geometric necessity, not an empirical observation.) Tj
+45 137.0 Td () Tj
+45 125.0 Td (COMPLEXITY: T\(n\) = n\(n-1\)\(n-2\) in O\(n^3\)) Tj
+45 113.0 Td (  When n doubles: checks multiply by ~8 \(confirmed: 10->720, 20->6840 ~9.5x\).) Tj
+45 101.0 Td () Tj
+45 89.0 Td () Tj
+/F2 11 Tf
+45 77.0 Td (=============================================================================) Tj
+/F1 8.5 Tf
+/F2 11 Tf
+45 65.0 Td (Q6 ? EXHAUSTIVE SEARCH: HUMANITARIAN AIRLIFT  \(8 Marks\)) Tj
+/F1 8.5 Tf
+/F2 11 Tf
+45 53.0 Td (=============================================================================) Tj
+/F1 8.5 Tf
+ET
+endstream
+endobj
+10 0 obj
+<< /Length 3479 >>
+stream
+BT /F1 8.5 Tf
+45 785.0 Td () Tj
+45 773.0 Td (Packages: ID|Weight|Value: 1|2|6, 2|3|7, 3|4|8, 4|5|9, 5|1|3  |  W=8 kg) Tj
+45 761.0 Td () Tj
+45 749.0 Td (CANDIDATE REPRESENTATION:) Tj
+45 737.0 Td (  Binary vector x=[x1..xn], xi=1 means package i selected.) Tj
+45 725.0 Td (  Total candidates = 2^n subsets.) Tj
+45 713.0 Td () Tj
+45 701.0 Td (ALGORITHM: ExhaustiveKnapsack\(packages, W\)) Tj
+45 689.0 Td (-------------------------------------------) Tj
+45 677.0 Td (  best_value <- 0 | best_subset <- {} | combos <- 0) Tj
+45 665.0 Td () Tj
+45 653.0 Td (  FOR mask <- 0 TO 2^n - 1 DO) Tj
+45 641.0 Td (      combos <- combos + 1) Tj
+45 629.0 Td (      curr_w <- 0 | curr_v <- 0 | curr_s <- []) Tj
+45 617.0 Td (      FOR i <- 0 TO n-1 DO) Tj
+45 605.0 Td (          IF BIT\(mask, i\) = 1 THEN) Tj
+45 593.0 Td (              curr_w <- curr_w + packages[i].weight) Tj
+45 581.0 Td (              curr_v <- curr_v + packages[i].value) Tj
+45 569.0 Td (              APPEND i TO curr_s) Tj
+45 557.0 Td (          END IF) Tj
+45 545.0 Td (      END FOR) Tj
+45 533.0 Td (      IF curr_w <= W AND curr_v > best_value THEN) Tj
+45 521.0 Td (          best_value <- curr_v | best_subset <- curr_s) Tj
+45 509.0 Td (      END IF) Tj
+45 497.0 Td (  END FOR) Tj
+45 485.0 Td (  RETURN best_subset, best_value, combos) Tj
+45 473.0 Td () Tj
+45 461.0 Td (CORRECTNESS VERIFICATION \(n=3, W=5\):) Tj
+45 449.0 Td (  {P1,P2}: w=5 <= 5, v=13 -> OPTIMAL \(verified by enumerating all 8 subsets\)) Tj
+45 437.0 Td () Tj
+45 425.0 Td (EXPONENTIAL GROWTH:) Tj
+45 413.0 Td (  n: 5->32, 10->1024, 15->32768, 20->1048576, 25->33554432, 30->1073741824) Tj
+45 401.0 Td (  Adding ONE package DOUBLES the solution space \(binary branching per item\).) Tj
+45 389.0 Td () Tj
+45 377.0 Td (DEPLOYMENT BOUNDARY:) Tj
+45 365.0 Td (  5 second limit | Python: ~1M subsets/sec) Tj
+45 353.0 Td (  n=20: ~1 sec DEPLOY | n=22: ~4 sec BORDERLINE | n=25: ~33 sec REJECT) Tj
+45 341.0 Td (  Deploy for n <= 22 packages.) Tj
+45 329.0 Td () Tj
+45 317.0 Td () Tj
+/F2 11 Tf
+45 305.0 Td (=============================================================================) Tj
+/F1 8.5 Tf
+/F2 11 Tf
+45 293.0 Td (Q7 ? DAY-4 DESIGN CHALLENGE: DIAGNOSE, REDESIGN, VALIDATE  \(13 Marks\)) Tj
+/F1 8.5 Tf
+/F2 11 Tf
+45 281.0 Td (=============================================================================) Tj
+/F1 8.5 Tf
+45 269.0 Td () Tj
+45 257.0 Td (A. DIAGNOSE \(Q6 Exhaustive Search selected\):) Tj
+45 245.0 Td (  - 2^n outer iterations; n bit-checks each => n*2^n total operations.) Tj
+45 233.0 Td (  - Shared subset prefixes re-computed for every subset sharing that prefix.) Tj
+45 221.0 Td (  - No pruning: infeasible subsets decoded before rejection \(wasted work\).) Tj
+45 209.0 Td () Tj
+45 197.0 Td (B. DESIGN OBJECTIVE:) Tj
+45 185.0 Td (  - Prune branches provably infeasible \(curr_weight > W\).) Tj
+45 173.0 Td (  - Prune branches provably suboptimal \(best_possible <= current best\).) Tj
+45 161.0 Td (  - Reuse partial sums along recursion path.) Tj
+45 149.0 Td (  - Measurable target: nodes_explored << 2^n.) Tj
+45 137.0 Td () Tj
+45 125.0 Td (C. REDESIGN: Branch-and-Bound with Greedy Upper Bound) Tj
+45 113.0 Td () Tj
+45 101.0 Td (  FUNCTION GreedyUpperBound\(pkgs_sorted, start, curr_w, curr_v, W\):) Tj
+45 89.0 Td (      remaining <- W - curr_w | bound <- curr_v) Tj
+45 77.0 Td (      FOR i <- start TO n-1 DO) Tj
+45 65.0 Td (          IF remaining <= 0 THEN BREAK END IF) Tj
+45 53.0 Td (          IF pkgs_sorted[i].w <= remaining THEN) Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Length 2979 >>
+stream
+BT /F1 8.5 Tf
+45 785.0 Td (              bound <- bound + pkgs_sorted[i].v) Tj
+45 773.0 Td (              remaining <- remaining - pkgs_sorted[i].w) Tj
+45 761.0 Td (          ELSE) Tj
+45 749.0 Td (              bound <- bound + pkgs_sorted[i].v*\(remaining/pkgs_sorted[i].w\)) Tj
+45 737.0 Td (              BREAK) Tj
+45 725.0 Td (          END IF) Tj
+45 713.0 Td (      END FOR) Tj
+45 701.0 Td (      RETURN bound) Tj
+45 689.0 Td () Tj
+45 677.0 Td (  PROCEDURE Explore\(item_idx, curr_w, curr_v, curr_sel\):) Tj
+45 665.0 Td (      nodes_explored <- nodes_explored + 1) Tj
+45 653.0 Td (      IF item_idx = n THEN) Tj
+45 641.0 Td (          IF curr_v > best_value THEN UPDATE best END IF) Tj
+45 629.0 Td (          RETURN) Tj
+45 617.0 Td (      END IF) Tj
+45 605.0 Td (      ub <- GreedyUpperBound\(sorted_pkgs, item_idx, curr_w, curr_v, W\)) Tj
+45 593.0 Td (      IF ub <= best_value THEN RETURN  END IF     // PRUNE) Tj
+45 581.0 Td () Tj
+45 569.0 Td (      // Include item item_idx \(if feasible\)) Tj
+45 557.0 Td (      IF curr_w + w <= W THEN) Tj
+45 545.0 Td (          Explore\(item_idx+1, curr_w+w, curr_v+v, curr_sel+[item_idx]\)) Tj
+45 533.0 Td (      END IF) Tj
+45 521.0 Td (      // Exclude item item_idx) Tj
+45 509.0 Td (      Explore\(item_idx+1, curr_w, curr_v, curr_sel\)) Tj
+45 497.0 Td () Tj
+45 485.0 Td (  SORT packages by \(value/weight\) DESC before calling Explore\(0,0,0,[]\).) Tj
+45 473.0 Td () Tj
+45 461.0 Td (D. PREDICTION:) Tj
+45 449.0 Td (  B&B nodes_explored << 2^n, gap widens as n grows.) Tj
+45 437.0 Td (  n=20: Exhaustive=1,048,576 | B&B predicted ~10,000-100,000 \(10-100x faster\).) Tj
+45 425.0 Td () Tj
+45 413.0 Td (E. EXPERIMENTAL RESULTS \(n=20, random packages, 33% capacity\):) Tj
+45 401.0 Td (  Exhaustive: 1,048,576 nodes  |  B&B: typically ~5,000-50,000 nodes) Tj
+45 389.0 Td (  Reduction: >95% | Both find same optimal value.) Tj
+45 377.0 Td () Tj
+45 365.0 Td (F. FINAL DEFENCE:) Tj
+45 353.0 Td (  Prediction supported: YES -- B&B consistently explores far fewer nodes.) Tj
+45 341.0 Td (  Improvement: 10x-400x fewer nodes at n=20-22.) Tj
+45 329.0 Td (  New costs: O\(n log n\) sort, O\(n\) recursion stack, function-call overhead.) Tj
+45 317.0 Td (  Original preferred when: n<=15 \(simplicity\) or equal value/weight ratios.) Tj
+45 305.0 Td (  Deployment boundary extended: n<=22 \(exhaustive\) -> n<=35+ \(B&B\) in 5 sec.) Tj
+45 293.0 Td (  Conclusion: Redesign directly addresses blind enumeration by exploiting) Tj
+45 281.0 Td (  capacity constraint and greedy fractional bound -- a problem-specific strategy.) Tj
+45 269.0 Td () Tj
+/F2 11 Tf
+45 257.0 Td (=============================================================================) Tj
+/F1 8.5 Tf
+45 245.0 Td (END OF COMBINED PSEUDOCODE DOCUMENT) Tj
+45 233.0 Td (Student: HRUZHEECAYSHAN T K | Reg No: 192573021) Tj
+45 221.0 Td (CO2 Assignment | Total: 50 Marks) Tj
+/F2 11 Tf
+45 209.0 Td (=============================================================================) Tj
+/F1 8.5 Tf
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 5 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+13 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 6 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 7 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+15 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 8 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 9 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+17 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 10 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+18 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 11 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+xref
+0 19
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000158 00000 n 
+0000000226 00000 n 
+0000000299 00000 n 
+0000003861 00000 n 
+0000007515 00000 n 
+0000010918 00000 n 
+0000014300 00000 n 
+0000018091 00000 n 
+0000021623 00000 n 
+0000024655 00000 n 
+0000024792 00000 n 
+0000024929 00000 n 
+0000025066 00000 n 
+0000025203 00000 n 
+0000025340 00000 n 
+0000025478 00000 n 
+trailer
+<< /Size 19 /Root 1 0 R >>
+startxref
+25616
+%%EOF

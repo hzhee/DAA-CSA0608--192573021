@@ -1,0 +1,89 @@
+======================================================================
+Q3 – BRUTE-FORCE STRING MATCHING: ENGINEERING THE BEHAVIOUR
+Student: HRUZHEECAYSHAN T K | Reg No: 192573021
+======================================================================
+
+──────────────────────────────────────────────────────────────────────
+EXPERIMENT 1: BEST CASE – 1 comparison per alignment
+──────────────────────────────────────────────────────────────────────
+Design: First char of pattern never appears in text.
+
+  Text:        'CCCCCCCCCCCCCCCCCCCC'  (n=20)
+  Pattern:     'BCCCC'  (m=5)
+  Matches:     None
+  Comparisons: 16
+  Theory:      n-m+1 = 16
+  Verification: ✓ EXACT MATCH
+
+──────────────────────────────────────────────────────────────────────
+EXPERIMENT 2: WORST CASE – m comparisons per alignment
+──────────────────────────────────────────────────────────────────────
+Design: Nearly-matching text; mismatch only at last pattern char.
+
+  Text:        'AAAAAAAAAAAAAAAAAAAB'  (n=20)
+  Pattern:     'AAAAB'  (m=5)
+  Alignments:  n-m+1 = 16
+  Matches:     [15]
+  Comparisons: 80
+  Theory (worst): (n-m+1)*m = 16*5 = 80
+  Verification: ✓ CLOSE
+
+──────────────────────────────────────────────────────────────────────
+EXPERIMENT 3: AVERAGE CASE – Random text and pattern
+──────────────────────────────────────────────────────────────────────
+
+  Text (first 50): 'QAHFTRXCKAFNAFQOFPVAUSIEYICCWPUSNZJOVQWPSBFHCGCHQJ...'  (n=100)
+  Pattern:          'ASRNG'  (m=5)
+  Matches at:       []
+  Comparisons:      101
+  Theory (avg):     ~n-m+1 = 96 (1 comp/alignment avg)
+
+──────────────────────────────────────────────────────────────────────
+EXPERIMENT 4: Multiple Occurrences
+──────────────────────────────────────────────────────────────────────
+
+  Text:        'ABCABCABCABCABC'  (n=15)
+  Pattern:     'ABC'  (m=3)
+  Matches at:  [0, 3, 6, 9, 12]  (5 occurrences)
+  Comparisons: 23
+
+──────────────────────────────────────────────────────────────────────
+EXPERIMENT 5: Comparison Count vs Text Length
+──────────────────────────────────────────────────────────────────────
+
+  Pattern: 'AAAAB' (worst-case design)
+
+         n |   Best (1/align) |  Worst (m/align) |     Actual
+  ─────────|──────────────────|──────────────────|───────────
+        20 |               16 |               80 |         80
+        50 |               46 |              230 |        230
+       100 |               96 |              480 |        480
+       200 |              196 |              980 |        980
+       500 |              496 |             2480 |       2480
+
+──────────────────────────────────────────────────────────────────────
+EXPERIMENT 6: Security Log Screening Simulation
+──────────────────────────────────────────────────────────────────────
+
+  Log length: 500 characters
+
+     Signature |   Found At |  Comparisons
+  ─────────────|────────────|─────────────
+      ERROR404 |        250 |          268
+    ROOTACCESS |         -1 |          509
+       MALWARE |         -1 |          506
+
+  COMPLEXITY ANALYSIS SUMMARY:
+  ┌─────────────────┬────────────────────────────────────┐
+  │ Case            │ Comparisons                        │
+  ├─────────────────┼────────────────────────────────────┤
+  │ Best            │ n - m + 1  ≈ O(n)                  │
+  │ Average         │ ≈ n - m + 1  (large alphabet)      │
+  │ Worst           │ (n-m+1) × m  ≈ O(mn)               │
+  └─────────────────┴────────────────────────────────────┘
+
+  OBSERVATION: The worst case (O(mn)) only occurs with deliberately
+  constructed near-match patterns. For real ASCII logs (large alphabet),
+  average case ≈ O(n) because mismatches occur on the first comparison.
+  For high-frequency log screening, KMP (O(n+m)) would be preferred.
+    

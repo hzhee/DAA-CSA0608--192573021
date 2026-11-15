@@ -1,0 +1,314 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [7 0 R 8 0 R 9 0 R] /Count 3 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+4 0 obj
+<< /Length 2841 >>
+stream
+BT
+/F1 9 Tf
+50 762.0 Td
+(================================================================================) Tj
+50 749.0 Td
+(  Q5 Brute Force Convex Hull) Tj
+50 736.0 Td
+(  Student: HRUZHEECAYSHAN T K  |  Reg No: 192573021) Tj
+50 723.0 Td
+(  CO2 Assignment - Design and Analysis of Algorithms) Tj
+50 710.0 Td
+(================================================================================) Tj
+50 697.0 Td
+() Tj
+50 684.0 Td
+(Q5 - Brute-Force Convex Hull \(7 Marks\)) Tj
+50 671.0 Td
+(=======================================) Tj
+50 658.0 Td
+(Problem: Identify the boundary points of a drone flight zone \(convex hull\).) Tj
+50 645.0 Td
+() Tj
+50 632.0 Td
+() Tj
+50 619.0 Td
+(DESIGN STARTING POINT \(Given\):) Tj
+50 606.0 Td
+(  An edge from point P_i to point P_j is on the convex hull if and only if) Tj
+50 593.0 Td
+(  all other points lie on the same side of \(or on\) the line through P_i, P_j.) Tj
+50 580.0 Td
+() Tj
+50 567.0 Td
+() Tj
+50 554.0 Td
+(GEOMETRIC TEST \(Cross Product\):) Tj
+50 541.0 Td
+(  For edge P_i -> P_j, and any third point P_k:) Tj
+50 528.0 Td
+(    cross = \(P_j.x - P_i.x\) * \(P_k.y - P_i.y\)) Tj
+50 515.0 Td
+(          - \(P_j.y - P_i.y\) * \(P_k.x - P_i.x\)) Tj
+50 502.0 Td
+() Tj
+50 489.0 Td
+(  Interpretation:) Tj
+50 476.0 Td
+(    cross > 0  =>  P_k is to the LEFT  of edge P_i->P_j) Tj
+50 463.0 Td
+(    cross < 0  =>  P_k is to the RIGHT of edge P_i->P_j) Tj
+50 450.0 Td
+(    cross = 0  =>  P_k is ON the line   \(collinear\)) Tj
+50 437.0 Td
+() Tj
+50 424.0 Td
+() Tj
+50 411.0 Td
+(ALGORITHM: BruteForceConvexHull\(P[0..n-1]\)) Tj
+50 398.0 Td
+(--------------------------------------------) Tj
+50 385.0 Td
+(// Find all edges that form the convex hull boundary) Tj
+50 372.0 Td
+(// Input : Array P of n points) Tj
+50 359.0 Td
+(// Output: Set of hull edges \(and hull vertices\)) Tj
+50 346.0 Td
+() Tj
+50 333.0 Td
+(  hull_edges <- empty set) Tj
+50 320.0 Td
+(  edge_checks <- 0) Tj
+50 307.0 Td
+() Tj
+50 294.0 Td
+(  FOR i <- 0 TO n-1 DO) Tj
+50 281.0 Td
+(      FOR j <- 0 TO n-1 DO) Tj
+50 268.0 Td
+(          IF i = j THEN CONTINUE END IF) Tj
+50 255.0 Td
+(          all_same_side <- TRUE) Tj
+50 242.0 Td
+(          sign          <- 0) Tj
+50 229.0 Td
+() Tj
+50 216.0 Td
+(          FOR k <- 0 TO n-1 DO) Tj
+50 203.0 Td
+(              IF k = i OR k = j THEN CONTINUE END IF) Tj
+50 190.0 Td
+(              edge_checks <- edge_checks + 1) Tj
+50 177.0 Td
+() Tj
+50 164.0 Td
+(              cross <- \(P[j].x - P[i].x\) * \(P[k].y - P[i].y\)) Tj
+50 151.0 Td
+(                     - \(P[j].y - P[i].y\) * \(P[k].x - P[i].x\)) Tj
+50 138.0 Td
+() Tj
+50 125.0 Td
+(              IF cross != 0 THEN) Tj
+50 112.0 Td
+(                  IF sign = 0 THEN) Tj
+50 99.0 Td
+(                      sign <- SIGN\(cross\)) Tj
+50 86.0 Td
+(                  ELSE IF SIGN\(cross\) != sign THEN) Tj
+50 73.0 Td
+(                      all_same_side <- FALSE) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 2976 >>
+stream
+BT
+/F1 9 Tf
+50 782.0 Td
+(                      BREAK) Tj
+50 769.0 Td
+(                  END IF) Tj
+50 756.0 Td
+(              END IF) Tj
+50 743.0 Td
+(          END FOR) Tj
+50 730.0 Td
+() Tj
+50 717.0 Td
+(          IF all_same_side THEN) Tj
+50 704.0 Td
+(              ADD edge \(P[i], P[j]\) TO hull_edges) Tj
+50 691.0 Td
+(          END IF) Tj
+50 678.0 Td
+(      END FOR) Tj
+50 665.0 Td
+(  END FOR) Tj
+50 652.0 Td
+() Tj
+50 639.0 Td
+(  hull_vertices <- EXTRACT_UNIQUE_POINTS\(hull_edges\)) Tj
+50 626.0 Td
+(  RETURN hull_vertices, hull_edges, edge_checks) Tj
+50 613.0 Td
+() Tj
+50 600.0 Td
+(Step-by-Step Logic:) Tj
+50 587.0 Td
+(  1. Consider every ordered pair of points \(P_i, P_j\) as a candidate edge.) Tj
+50 574.0 Td
+(  2. For each candidate edge, check all remaining points P_k.) Tj
+50 561.0 Td
+(  3. Compute cross product of edge vector and vector to P_k.) Tj
+50 548.0 Td
+(  4. If all P_k have the same sign \(or are collinear\), edge is on hull.) Tj
+50 535.0 Td
+(  5. Collect all hull edges; extract unique hull vertices.) Tj
+50 522.0 Td
+(  6. Order hull vertices for boundary visualisation.) Tj
+50 509.0 Td
+() Tj
+50 496.0 Td
+() Tj
+50 483.0 Td
+(CORRECTNESS ARGUMENT) Tj
+50 470.0 Td
+(=====================) Tj
+50 457.0 Td
+(  Geometric Reasoning:) Tj
+50 444.0 Td
+(    An edge \(P_i, P_j\) lies on the convex hull boundary if and only if) Tj
+50 431.0 Td
+(    the ENTIRE point set lies on one side of the directed line P_i->P_j.) Tj
+50 418.0 Td
+() Tj
+50 405.0 Td
+(    WHY? The convex hull is the smallest convex polygon containing all points.) Tj
+50 392.0 Td
+(    Any edge of this polygon must have all points on one side \(the interior) Tj
+50 379.0 Td
+(    side\). If even ONE point were on the other side, the polygon would not) Tj
+50 366.0 Td
+(    be convex at that edge -- a contradiction.) Tj
+50 353.0 Td
+() Tj
+50 340.0 Td
+(    The cross product gives the signed area of the triangle P_i, P_j, P_k.) Tj
+50 327.0 Td
+(    Its sign indicates which side of the directed line P_k lies on.) Tj
+50 314.0 Td
+(    If ALL cross products have the same sign, ALL points are on ONE side.) Tj
+50 301.0 Td
+(    Therefore the edge is a valid convex hull edge.) Tj
+50 288.0 Td
+() Tj
+50 275.0 Td
+(    This is a purely geometric argument -- it does not rely on program output.) Tj
+50 262.0 Td
+() Tj
+50 249.0 Td
+() Tj
+50 236.0 Td
+(COMPLEXITY ANALYSIS) Tj
+50 223.0 Td
+(====================) Tj
+50 210.0 Td
+(  For n points:) Tj
+50 197.0 Td
+(    Outer loop:  n * \(n-1\) edge candidates) Tj
+50 184.0 Td
+(    Inner loop:  up to \(n-2\) point checks per edge) Tj
+50 171.0 Td
+() Tj
+50 158.0 Td
+(  Total edge checks = n * \(n-1\) * \(n-2\) in O\(n^3\)) Tj
+50 145.0 Td
+() Tj
+50 132.0 Td
+(  n   | Edge Checks | Growth factor) Tj
+50 119.0 Td
+(  ----+-------------+--------------) Tj
+50 106.0 Td
+(   5  |       60    |    --) Tj
+50 93.0 Td
+(  10  |      720    |   12x) Tj
+50 80.0 Td
+(  20  |    6,840    |   9.5x  \(~8x expected for 2x n\)) Tj
+50 67.0 Td
+(  50  |  117,600    |   ~8x per doubling) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Length 1001 >>
+stream
+BT
+/F1 9 Tf
+50 782.0 Td
+( 100  |  970,200    |   ~8x) Tj
+50 769.0 Td
+() Tj
+50 756.0 Td
+(  When n doubles: checks multiply by ~8 \(confirms O\(n^3\)\)) Tj
+50 743.0 Td
+(  Improvement: Graham Scan / Jarvis March run in O\(n log n\) or O\(nh\)) Tj
+50 730.0 Td
+() Tj
+50 717.0 Td
+() Tj
+50 704.0 Td
+(TEST CONFIGURATIONS) Tj
+50 691.0 Td
+(====================) Tj
+50 678.0 Td
+(  Test 1 \(Mixed boundary + interior\):) Tj
+50 665.0 Td
+(    Points: \(0,0\),\(4,0\),\(4,4\),\(0,4\),\(2,2\),\(1,1\),\(3,3\),\(2,0.5\)) Tj
+50 652.0 Td
+(    Hull vertices expected: \(0,0\),\(4,0\),\(4,4\),\(0,4\)) Tj
+50 639.0 Td
+() Tj
+50 626.0 Td
+(  Test 2 \(Challenging - collinear + near-boundary\):) Tj
+50 613.0 Td
+(    Points include collinear triples and points just inside the boundary) Tj
+50 600.0 Td
+(    Tests that collinear points are correctly handled) Tj
+50 587.0 Td
+(    Points: \(0,0\),\(1,0\),\(2,0\),\(2,2\),\(1,2\),\(0,2\),\(1,1\),\(0.5,0.5\)) Tj
+50 574.0 Td
+(    Hull expected: \(0,0\),\(2,0\),\(2,2\),\(0,2\)) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 5 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 6 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000127 00000 n 
+0000000195 00000 n 
+0000003088 00000 n 
+0000006116 00000 n 
+0000007169 00000 n 
+0000007295 00000 n 
+0000007421 00000 n 
+trailer
+<< /Size 10 /Root 1 0 R >>
+startxref
+7547
+%%EOF
