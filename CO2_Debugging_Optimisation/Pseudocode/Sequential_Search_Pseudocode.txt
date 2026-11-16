@@ -1,0 +1,64 @@
+================================================================================
+ALGORITHM: THREAT INTELLIGENCE BLOCKLIST SEARCH
+MODULE: SentinelOps SOC Telemetry Pipeline
+================================================================================
+
+1. ORIGINAL BUGGY ALGORITHM (As written by junior developer):
+--------------------------------------------------------------------------------
+ALGORITHM IsBlocked_Buggy(blocklist[0..m-1], target_ip):
+    Input:  blocklist, array of m blocked IP strings; target_ip, string
+    Output: boolean indicating whether target_ip is blocked
+
+    for i ← 0 to m - 1 do
+        if blocklist[i] == target_ip then
+            return false                                // DEFECT 3: Inverted boolean logic (returns false on match)!
+        else
+            return false                                // DEFECT 4: Premature return in loop aborts on index 0!
+
+
+2. CORRECTED SEQUENTIAL SEARCH ALGORITHM:
+--------------------------------------------------------------------------------
+ALGORITHM IsBlocked_Corrected(blocklist[0..m-1], target_ip):
+    Input:  blocklist, array of m blocked IP strings; target_ip, string
+    Output: true if target_ip is in blocklist, false otherwise
+
+    for i ← 0 to m - 1 do
+        if blocklist[i] == target_ip then
+            return true                                 // FIX 3: Return true upon finding exact match
+
+    return false                                        // FIX 4: Return false only after all elements checked
+
+
+3. PRODUCTION OPTIMISED ALGORITHM (HASH SET REGISTRY):
+--------------------------------------------------------------------------------
+ALGORITHM ThreatIntel_Registry_Build(blocklist[0..m-1]):
+    Input:  blocklist, array of m IP strings
+    Output: hash_set containing all blocked IPs
+
+    H ← new HashSet()
+    for each ip in blocklist do
+        H.insert(ip)                                    // Preprocessed in O(m) time and O(m) space
+    return H
+
+ALGORITHM IsBlocked_Optimised(H, target_ip):
+    Input:  H, pre-indexed HashSet of blocked IPs; target_ip, string
+    Output: true if target_ip ∈ H, false otherwise
+
+    return target_ip ∈ H                                // Instant O(1) average lookup via hashing
+
+
+4. COMPLEXITY ANALYSIS SUMMARY:
+--------------------------------------------------------------------------------
+Let m = size of blocklist, Q = number of incoming queries (e.g., 50,000 alerts/day).
+
++--------------------------+-------------------+-------------------+-------------------+---------------+
+| Implementation           | Single Query Time | Q Queries Time    | Worst Case Time   | Aux Space     |
++--------------------------+-------------------+-------------------+-------------------+---------------+
+| Corrected Sequential     | Ω(1) Best         | Θ(Q · m)          | O(Q · m)          | O(1)          |
+| Optimised Hash Set       | Θ(1) Average      | Θ(m + Q)          | O(m + Q)          | O(m)          |
++--------------------------+-------------------+-------------------+-------------------+---------------+
+
+* For SentinelOps with m = 10,000 and Q = 50,000:
+  Sequential Search: 50,000 × 10,000 = 500,000,000 string comparisons!
+  Hash Set Lookup:   10,000 (build) + 50,000 (lookups) = 60,000 operations (~8,300x speedup).
+================================================================================

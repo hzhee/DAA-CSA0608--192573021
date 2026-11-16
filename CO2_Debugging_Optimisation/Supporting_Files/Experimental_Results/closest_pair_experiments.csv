@@ -1,0 +1,5 @@
+batch_size,brute_force_pairs_evaluated,brute_force_sqrt_operations,brute_force_time_seconds,optimised_pairs_evaluated,optimised_sqrt_operations,optimised_time_seconds,reduction_percentage,minimum_distance_km
+1000,499500,499500,0.05847,2005,1,0.00042,99.6,0.17219
+2000,1999000,1999000,0.23881,1502,1,0.00062,99.92,0.24123
+4000,7998000,7998000,0.97368,4174,1,0.00128,99.95,0.1691
+8000,31996000,31996000,3.7974,14458,1,0.00284,99.95,0.17333

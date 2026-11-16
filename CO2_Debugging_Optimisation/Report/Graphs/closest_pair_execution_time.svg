@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <rect width="800" height="500" fill="#1e1e2e" rx="10"/>
+  <text x="400" y="40" fill="#cdd6f4" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">
+    Execution Time Scaling: Closest Pair Algorithms
+  </text>
+  <text x="400" y="65" fill="#a6adc8" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">
+    Wall Clock Seconds for Telemetry Batches up to 8,000 Events
+  </text>
+
+  <!-- Grid lines -->
+  <line x1="100" y1="420" x2="740" y2="420" stroke="#45475a" stroke-width="1.5"/>
+  <line x1="100" y1="340" x2="740" y2="340" stroke="#313244" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="100" y1="260" x2="740" y2="260" stroke="#313244" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="100" y1="180" x2="740" y2="180" stroke="#313244" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="100" y1="100" x2="740" y2="100" stroke="#313244" stroke-width="1" stroke-dasharray="4"/>
+
+  <!-- Y labels (0 to 12s) -->
+  <text x="90" y="425" fill="#a6adc8" font-family="Arial, sans-serif" font-size="11" text-anchor="end">0.0s</text>
+  <text x="90" y="345" fill="#a6adc8" font-family="Arial, sans-serif" font-size="11" text-anchor="end">3.0s</text>
+  <text x="90" y="265" fill="#a6adc8" font-family="Arial, sans-serif" font-size="11" text-anchor="end">6.0s</text>
+  <text x="90" y="185" fill="#a6adc8" font-family="Arial, sans-serif" font-size="11" text-anchor="end">9.0s</text>
+  <text x="90" y="105" fill="#a6adc8" font-family="Arial, sans-serif" font-size="11" text-anchor="end">12.0s</text>
+
+  <!-- X labels -->
+  <text x="180" y="445" fill="#cdd6f4" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">N=1,000</text>
+  <text x="320" y="445" fill="#cdd6f4" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">N=2,000</text>
+  <text x="500" y="445" fill="#cdd6f4" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">N=4,000</text>
+  <text x="700" y="445" fill="#cdd6f4" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">N=8,000</text>
+
+  <!-- Brute Force Time Curve: Red -->
+  <polyline fill="none" stroke="#fab387" stroke-width="3.5" points="180,415 320,402 500,350 700,135" />
+  <circle cx="180" cy="415" r="5" fill="#fab387"/>
+  <circle cx="320" cy="402" r="5" fill="#fab387"/>
+  <circle cx="500" cy="350" r="5" fill="#fab387"/>
+  <circle cx="700" cy="135" r="5" fill="#fab387"/>
+  <text x="705" y="125" fill="#fab387" font-family="Arial, sans-serif" font-size="11" font-weight="bold">~10.8s (Quadratic)</text>
+
+  <!-- Optimised Time Curve: Blue -->
+  <polyline fill="none" stroke="#89b4fa" stroke-width="3.5" points="180,419 320,419 500,418 700,416" />
+  <circle cx="180" cy="419" r="5" fill="#89b4fa"/>
+  <circle cx="320" cy="419" r="5" fill="#89b4fa"/>
+  <circle cx="500" cy="418" r="5" fill="#89b4fa"/>
+  <circle cx="700" cy="416" r="5" fill="#89b4fa"/>
+  <text x="705" y="410" fill="#89b4fa" font-family="Arial, sans-serif" font-size="11" font-weight="bold">~0.015s (&gt;700x faster)</text>
+
+  <!-- Legend -->
+  <rect x="120" y="80" width="220" height="60" fill="#181825" rx="5" stroke="#45475a"/>
+  <line x1="135" y1="100" x2="165" y2="100" stroke="#fab387" stroke-width="3"/>
+  <circle cx="150" cy="100" r="4" fill="#fab387"/>
+  <text x="175" y="104" fill="#cdd6f4" font-family="Arial, sans-serif" font-size="11">Brute Force Time</text>
+  <line x1="135" y1="125" x2="165" y2="125" stroke="#89b4fa" stroke-width="3"/>
+  <circle cx="150" cy="125" r="4" fill="#89b4fa"/>
+  <text x="175" y="129" fill="#cdd6f4" font-family="Arial, sans-serif" font-size="11">Optimised Time</text>
+</svg>

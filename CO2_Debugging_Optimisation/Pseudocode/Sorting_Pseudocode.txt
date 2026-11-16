@@ -1,0 +1,93 @@
+================================================================================
+ALGORITHM: ALERT TRIAGE SEVERITY SORTING (INSERTION SORT)
+MODULE: SentinelOps SOC Telemetry Pipeline
+================================================================================
+
+1. ORIGINAL BUGGY ALGORITHM (As written by junior developer):
+--------------------------------------------------------------------------------
+ALGORITHM SortAlerts_Buggy(alerts[0..n-1]):
+    Input:  alerts, an array of n tuples (alert_id, severity)
+    Output: alerts sorted in descending order of severity
+
+    for i ← 1 to n - 1 do
+        key ← alerts[i]
+        j ← i - 1
+        while j > 0 and alerts[j].severity < key.severity do    // DEFECT 1: j > 0 skips index 0!
+            alerts[j + 1] ← alerts[j]
+            j ← j - 1
+        alerts[j] ← key                                         // DEFECT 2: Overwrites index j instead of j+1!
+    return alerts
+
+
+2. CORRECTED STABLE ALGORITHM (Systematically Debugged):
+--------------------------------------------------------------------------------
+ALGORITHM SortAlerts_Corrected(alerts[0..n-1]):
+    Input:  alerts, an array of n tuples (alert_id, severity)
+    Output: alerts stably sorted in descending order of severity (highest first)
+
+    if n ≤ 1 then
+        return alerts
+
+    for i ← 1 to n - 1 do
+        key ← alerts[i]
+        j ← i - 1
+        // FIX 1: j ≥ 0 ensures element at index 0 is compared and shifted if needed
+        // Strict inequality (<) ensures stability: equal elements are NEVER shifted,
+        // preserving earlier arrival order.
+        while j ≥ 0 and alerts[j].severity < key.severity do
+            alerts[j + 1] ← alerts[j]
+            j ← j - 1
+        // FIX 2: key is placed at j + 1, into the vacant slot left by the right shifts
+        alerts[j + 1] ← key
+    return alerts
+
+Loop Invariant:
+    At the start of each iteration i, subarray alerts[0..i-1] contains the original
+    first i elements stably sorted in non-increasing order of severity.
+
+
+3. PRODUCTION OPTIMISED ALGORITHMS:
+--------------------------------------------------------------------------------
+A. Adaptive Fast-Path Insertion Sort (For nearly-sorted alert streams):
+-----------------------------------------------------------------------
+ALGORITHM SortAlerts_Adaptive(alerts[0..n-1]):
+    if n ≤ 1 then return alerts
+
+    // Fast-path: O(n) scan to detect if already sorted
+    is_sorted ← true
+    for k ← 0 to n - 2 do
+        if alerts[k].severity < alerts[k + 1].severity then
+            is_sorted ← false
+            break
+    if is_sorted then
+        return alerts
+
+    // In-place stable insertion sort
+    for i ← 1 to n - 1 do
+        key ← alerts[i]
+        j ← i - 1
+        while j ≥ 0 and alerts[j].severity < key.severity do
+            alerts[j + 1] ← alerts[j]
+            j ← j - 1
+        alerts[j + 1] ← key
+    return alerts
+
+B. Production Timsort (Standard Python C-level sort):
+------------------------------------------------------
+ALGORITHM SortAlerts_Timsort(alerts[0..n-1]):
+    return Sort(alerts, key = λ(x): x.severity, reverse = true)
+    // Exploits natural monotonic runs in alert telemetry; guarantees O(n log n) worst-case
+    // and O(n) on presorted telemetry while guaranteeing stability.
+
+
+4. COMPLEXITY ANALYSIS SUMMARY:
+--------------------------------------------------------------------------------
++--------------------------+-------------------+-------------------+-------------------+---------------+
+| Metric                   | Best Case (Ω)     | Average Case (Θ)  | Worst Case (O)    | Space (Aux)   |
++--------------------------+-------------------+-------------------+-------------------+---------------+
+| Corrected Insertion Sort | Ω(n) (Presorted)  | Θ(n²)             | O(n²) (Ascending) | O(1) in-place |
+| Adaptive Insertion Sort  | Ω(n)              | Θ(n + d)          | O(n²)             | O(1) in-place |
+| Production Timsort       | Ω(n)              | Θ(n log n)        | O(n log n)        | O(n)          |
++--------------------------+-------------------+-------------------+-------------------+---------------+
+* Where d is the number of inversions in the incoming alert stream.
+================================================================================

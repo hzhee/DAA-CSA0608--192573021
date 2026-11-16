@@ -1,0 +1,28 @@
+================================================================================
+PART (a): REPRODUCE AND IDENTIFY DEFECTS (ORIGINAL CODE EXECUTION)
+================================================================================
+
+1. sort_alerts:
+   Input:           [('A1', 3), ('A2', 9), ('A3', 5), ('A4', 9), ('A5', 1)]
+   Expected:        [('A2', 9), ('A4', 9), ('A3', 5), ('A1', 3), ('A5', 1)]
+   Actual:          [('A4', 9), ('A3', 5), ('A3', 5), ('A5', 1), ('A5', 1)]
+   Status:          DEFECTIVE (Elements duplicated / overwritten; 'A1' lost)
+
+2. is_blocked:
+   Blocklist:       ['10.0.0.5', '10.0.0.9', '172.16.4.2']
+   Query '10.0.0.9': Actual = False, Expected = True [DEFECTIVE]
+   Query '10.0.0.5': Actual = False, Expected = True [DEFECTIVE]
+   Query '8.8.8.8': Actual = False, Expected = False [DEFECTIVE]
+
+3. find_signature:
+   Log: 'FAILFAIXFAIL', Pattern: 'FAIL'
+   Expected:        [0, 8]
+   Actual:          [0, 4]
+   Status:          DEFECTIVE (Missed end-of-string match index 8; false hit at 4)
+
+4. closest_logins:
+   Events:          [(2, 3), (12, 30), (40, 50), (5, 1), (12, 10), (3, 4)]
+   Expected:        pair=(0, 5), dist=1.41421
+   Actual:          pair=(0, 2), dist=60.44005
+   Status:          DEFECTIVE (Calculated FARTHEST pair instead of CLOSEST)
+================================================================================

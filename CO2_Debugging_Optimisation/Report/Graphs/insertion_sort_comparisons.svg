@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <rect width="800" height="500" fill="#1e1e2e" rx="10"/>
+  <text x="400" y="40" fill="#cdd6f4" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">
+    Insertion Sort Comparisons: Nearly-Sorted vs Random Telemetry
+  </text>
+  <text x="400" y="65" fill="#a6adc8" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">
+    Linear O(N) Inversion Count vs Quadratic O(N²) Average Comparisons
+  </text>
+
+  <!-- Grid lines -->
+  <line x1="100" y1="420" x2="740" y2="420" stroke="#45475a" stroke-width="1.5"/>
+  <line x1="100" y1="340" x2="740" y2="340" stroke="#313244" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="100" y1="260" x2="740" y2="260" stroke="#313244" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="100" y1="180" x2="740" y2="180" stroke="#313244" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="100" y1="100" x2="740" y2="100" stroke="#313244" stroke-width="1" stroke-dasharray="4"/>
+
+  <!-- Y labels (0 to 1M) -->
+  <text x="90" y="425" fill="#a6adc8" font-family="Arial, sans-serif" font-size="11" text-anchor="end">0</text>
+  <text x="90" y="345" fill="#a6adc8" font-family="Arial, sans-serif" font-size="11" text-anchor="end">250K</text>
+  <text x="90" y="265" fill="#a6adc8" font-family="Arial, sans-serif" font-size="11" text-anchor="end">500K</text>
+  <text x="90" y="185" fill="#a6adc8" font-family="Arial, sans-serif" font-size="11" text-anchor="end">750K</text>
+  <text x="90" y="105" fill="#a6adc8" font-family="Arial, sans-serif" font-size="11" text-anchor="end">1.0M</text>
+
+  <!-- X labels -->
+  <text x="180" y="445" fill="#cdd6f4" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">N=100</text>
+  <text x="320" y="445" fill="#cdd6f4" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">N=500</text>
+  <text x="500" y="445" fill="#cdd6f4" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">N=1,000</text>
+  <text x="700" y="445" fill="#cdd6f4" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">N=2,000</text>
+
+  <!-- Random Order Curve: Magenta -->
+  <!-- N=100: ~2.5K (419), N=500: ~62K (400), N=1000: ~250K (340), N=2000: ~1M (100) -->
+  <polyline fill="none" stroke="#f5c2e7" stroke-width="3.5" points="180,419 320,400 500,340 700,100" />
+  <circle cx="180" cy="419" r="5" fill="#f5c2e7"/>
+  <circle cx="320" cy="400" r="5" fill="#f5c2e7"/>
+  <circle cx="500" cy="340" r="5" fill="#f5c2e7"/>
+  <circle cx="700" cy="100" r="5" fill="#f5c2e7"/>
+  <text x="705" y="90" fill="#f5c2e7" font-family="Arial, sans-serif" font-size="11" font-weight="bold">~1,000,000 comps (N²/2)</text>
+
+  <!-- Nearly-Sorted Curve: Cyan (linear) -->
+  <polyline fill="none" stroke="#89dceb" stroke-width="3.5" points="180,419 320,418 500,417 700,415" />
+  <circle cx="180" cy="419" r="5" fill="#89dceb"/>
+  <circle cx="320" cy="418" r="5" fill="#89dceb"/>
+  <circle cx="500" cy="417" r="5" fill="#89dceb"/>
+  <circle cx="700" cy="415" r="5" fill="#89dceb"/>
+  <text x="705" y="410" fill="#89dceb" font-family="Arial, sans-serif" font-size="11" font-weight="bold">~2,300 comps (O(N))</text>
+
+  <!-- Legend -->
+  <rect x="120" y="80" width="220" height="60" fill="#181825" rx="5" stroke="#45475a"/>
+  <line x1="135" y1="100" x2="165" y2="100" stroke="#f5c2e7" stroke-width="3"/>
+  <circle cx="150" cy="100" r="4" fill="#f5c2e7"/>
+  <text x="175" y="104" fill="#cdd6f4" font-family="Arial, sans-serif" font-size="11">Random Order O(N²)</text>
+  <line x1="135" y1="125" x2="165" y2="125" stroke="#89dceb" stroke-width="3"/>
+  <circle cx="150" cy="125" r="4" fill="#89dceb"/>
+  <text x="175" y="129" fill="#cdd6f4" font-family="Arial, sans-serif" font-size="11">Nearly Sorted O(N)</text>
+</svg>

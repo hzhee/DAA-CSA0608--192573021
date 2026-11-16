@@ -1,0 +1,81 @@
+
+================================================================================
+PART (b): CORRECTED MODULE VERIFICATION & BOUNDARY TESTING
+================================================================================
+
+--- Section 1: Specification Test Data ---
+  [PASS] sort_alerts spec test data
+  [PASS] is_blocked spec test IP 10.0.0.9
+  [PASS] is_blocked spec test IP 10.0.0.5
+  [PASS] is_blocked spec test IP 8.8.8.8
+  [PASS] find_signature spec test data
+  [PASS] closest_logins spec pair indices
+  [PASS] closest_logins spec distance
+
+--- Section 2: Boundary & Edge Cases ---
+  [PASS] sort_alerts: empty list
+  [PASS] sort_alerts: single item
+  [PASS] sort_alerts: stability on equal severities
+  [PASS] is_blocked: empty blocklist
+  [PASS] is_blocked: single entry hit
+  [PASS] is_blocked: single entry miss
+  [PASS] find_signature: pattern at end of log
+  [PASS] find_signature: pattern longer than log
+  [PASS] find_signature: pattern equals log
+  [PASS] find_signature: empty pattern
+  [PASS] find_signature: empty log
+  [PASS] closest_logins: empty events list (<2)
+  [PASS] closest_logins: single event (<2)
+  [PASS] closest_logins: collocated identical coordinates (dist 0)
+
+================================================================================
+PART (c): OPTIMISED MODULE VERIFICATION & EQUIVALENCE TESTING
+================================================================================
+  [PASS] Optimised sort_alerts (Timsort)
+  [PASS] Optimised sort_alerts (Adaptive Insertion)
+  [PASS] Optimised BlocklistRegistry IP 10.0.0.9
+  [PASS] Optimised BlocklistRegistry IP 10.0.0.5
+  [PASS] Optimised BlocklistRegistry IP 8.8.8.8
+  [PASS] Optimised find_signature (KMP)
+  [PASS] Optimised closest_logins (Sweep-Line Dist)
+  [PASS] Optimised closest_logins (Divide & Conquer Dist)
+
+================================================================================
+PART (d): EMPIRICAL BENCHMARKS & COMPLEXITY ANALYSIS
+================================================================================
+
+[Benchmark 1] Closest Pair Telemetry Scaling (N = 1000 to 8000 events):
+     N |     BF Pairs |      BF Sqrt |  BF Time(s) |  Opt Pairs | Opt Sqrt | Opt Time(s) |  Pair Comp Reduction
+---------------------------------------------------------------------------------------------------------
+  1000 |      499,500 |      499,500 |      0.0585 |      2,005 |        1 |      0.0004 |               99.60%
+  2000 |    1,999,000 |    1,999,000 |      0.2388 |      1,502 |        1 |      0.0006 |               99.92%
+  4000 |    7,998,000 |    7,998,000 |      0.9737 |      4,174 |        1 |      0.0013 |               99.95%
+  8000 |   31,996,000 |   31,996,000 |      3.7974 |     14,458 |        1 |      0.0028 |               99.95%
+
+[Benchmark 2] Insertion Sort: Nearly-Sorted vs Random Telemetry (Comparisons & Time):
+     N |  Nearly-Sorted Comp |  Random Comp |  Comp Ratio (Rand/Near) |  Nearly Time(s) |  Random Time(s)
+---------------------------------------------------------------------------------------------------------
+   100 |                 108 |        2,348 |                   21.74x |         0.00001 |         0.00008
+   500 |                 510 |       58,848 |                  115.39x |         0.00003 |         0.00215
+  1000 |               1,008 |      220,898 |                  219.14x |         0.00005 |         0.00837
+  2000 |               2,022 |      872,793 |                  431.65x |         0.00011 |         0.03732
+
+[Benchmark 3] Threat Intelligence Blocklist Lookup: Sequential Search vs Hash Set:
+   Blocklist size M = 10,000, Query count Q = 20,000
+   Sequential Search: 2.028 s (projected for 20,000 queries)
+   Optimised Hash Set: 0.0004 s (actual for 20,000 queries)
+   Observed Speedup:  5690.4x faster with O(1) set lookup!
+
+[Benchmark 4] String Matching: Worst-Case Repetitive Signature Search:
+   Text length N = 5,001, Pattern length M = 101
+   Brute Force Comparisons: 495,001 (theoretical ~ (N - M + 1) * M = 495,001)
+   KMP Linear Comparisons:  5,200 (theoretical ~ O(N + M) = 5,102)
+   Comparison Reduction:    98.95% fewer character checks
+
+================================================================================
+FINAL TEST HARNESS SUMMARY:
+  Passed Test Assertions:  29
+  Failed Test Assertions:  0
+  Experimental CSV Saved: /Users/hruzheecayshantk/DAA-CSA0608--192573021/CO2_Debugging_Optimisation/Supporting_Files/Experimental_Results/closest_pair_experiments.csv
+  Graphs Generated In:    /Users/hruzheecayshantk/DAA-CSA0608--192573021/CO2_Debugging_Optimisation/Report/Graphs
+================================================================================
