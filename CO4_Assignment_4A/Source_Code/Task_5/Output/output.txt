@@ -1,0 +1,26 @@
+TASK 5 - SHORTEST PATHS
+Dijkstra trace (settle vertex; relax updates):
+  A at 0; B:inf->4, C:inf->7
+  B at 4; C:7->6, D:inf->10
+  C at 6; D:10->7, E:inf->14
+  D at 7; E:14->10
+  E at 10; no updates
+Dijkstra distances: {'A': '0', 'B': '4', 'C': '6', 'D': '7', 'E': '10'}
+Predecessors: {'A': None, 'B': 'A', 'C': 'B', 'D': 'C', 'E': 'D'}
+Bellman-Ford passes:
+  1: A->B:inf->4, A->C:inf->7, B->C:7->6, B->D:inf->10, C->D:10->7, D->E:inf->10
+  2: no changes
+Bellman-Ford distances: {'A': '0', 'B': '4', 'C': '6', 'D': '7', 'E': '10'}
+Reachable negative cycle: False
+Floyd-Warshall distances (rows/columns A-E):
+        A    B    C    D    E
+  A:    0    4    6    7   10
+  B:  INF    0    2    3    6
+  C:  INF  INF    0    1    4
+  D:  INF  INF  INF    0    3
+  E:  INF  INF  INF  INF    0
+Negative cycle in supplied graph: False
+Negative-edge counterexample (Dijkstra run outside its precondition):
+  distance to D: Dijkstra=6, Bellman-Ford=4
+Reachable negative-cycle test: True
+Tests passed: supplied graph agreement, all-pairs distance, negative edge, negative cycle.

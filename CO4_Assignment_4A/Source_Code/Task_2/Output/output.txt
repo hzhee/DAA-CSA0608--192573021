@@ -1,0 +1,24 @@
+
+GIVEN INSTANCE
+Processing order: A(p=80, d=2) -> C(p=60, d=2) -> D(p=40, d=3) -> B(p=35, d=1) -> E(p=25, d=1)
+Job | checked slots | decision
+  A |           [2] | placed at 2
+  C |        [2, 1] | placed at 1
+  D |           [3] | placed at 3
+  B |           [1] | rejected; no free feasible slot
+  E |           [1] | rejected; no free feasible slot
+Final schedule: slot 1=C slot 2=A slot 3=D
+Total profit: 180
+
+CHALLENGE: change B profit from 35 to 90
+Processing order: B(p=90, d=1) -> A(p=80, d=2) -> C(p=60, d=2) -> D(p=40, d=3) -> E(p=25, d=1)
+Job | checked slots | decision
+  B |           [1] | placed at 1
+  A |           [2] | placed at 2
+  C |        [2, 1] | rejected; no free feasible slot
+  D |           [3] | placed at 3
+  E |           [1] | rejected; no free feasible slot
+Final schedule: slot 1=B slot 2=A slot 3=D
+Total profit: 210
+
+Tests passed: supplied instance, modified-profit case, empty job set.

@@ -1,0 +1,18 @@
+TASK 3 - 0/1 KNAPSACK
+State: dp[i][w] is the maximum value from the first i items with capacity at most w.
+w       :   0   1   2   3   4   5   6   7
+first none:   0   0   0   0   0   0   0   0
+first    P:   0   0  12  12  12  12  12  12
+first    Q:   0   0  12  20  20  32  32  32
+first    R:   0   0  12  20  25  32  37  45
+first    S:   0   0  12  20  25  32  37  45
+
+Reconstruction (from S back to P):
+  S: exclude; remaining capacity 7 -> 7
+  R: include; remaining capacity 7 -> 3
+  Q: include; remaining capacity 3 -> 0
+  P: exclude; remaining capacity 0 -> 0
+Selected: Q, R
+Total weight: 7
+Optimal value: 45
+Tests passed: supplied instance, zero capacity, overweight item.

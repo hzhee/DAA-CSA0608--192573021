@@ -1,0 +1,11 @@
+TASK 4 - WORDBREAK DEFECT AND REPAIR
+Failing input: text='ab'; dictionary={'b'}
+end | start | substring | DP[start] | in dictionary | accepted after repair
+  1 |     0 |       'a' |      True |         False | False
+  2 |     0 |      'ab' |      True |         False | False
+  2 |     1 |       'b' |     False |          True | False
+Faulty states: [True, False, True] -> True
+Correct states: [True, False, False] -> False
+The faulty rule marks DP[2] true from 'b' although DP[1] is false.
+Regression: text='cat'; dictionary={'cat'} -> True, words=['cat'], DP=[True, False, False, True]
+Tests passed: false-positive counterexample, valid whole word, empty string.

@@ -1,0 +1,26 @@
+
+GIVEN EIGHT-JOB INSTANCE
+i | job (start-finish, value) | p(i) | previous job | take | skip | best
+1 | J1 (1-3, 20) |    0 |             0 |   20 |    0 |   20
+2 | J2 (2-5, 50) |    0 |             0 |   50 |   20 |   50
+3 | J3 (4-6, 30) |    1 |            J1 |   50 |   50 |   50
+4 | J4 (6-8, 40) |    3 |            J3 |   90 |   50 |   90
+5 | J5 (5-9, 60) |    2 |            J2 |  110 |   90 |  110
+6 | J6 (8-10, 30) |    4 |            J4 |  120 |  110 |  120
+7 | J7 (9-11, 50) |    5 |            J5 |  160 |  120 |  160
+8 | J8 (11-13, 40) |    7 |            J7 |  200 |  160 |  200
+DP: [0, 20, 50, 50, 90, 110, 120, 160, 200]
+Selected: J2, J5, J7, J8 -> 200
+
+ADVERSARIAL: one high-value interval blocks a chain
+i | job (start-finish, value) | p(i) | previous job | take | skip | best
+1 | B (1-4, 60) |    0 |             0 |   60 |    0 |   60
+2 | C (4-7, 60) |    1 |             B |  120 |   60 |  120
+3 | A (1-10, 100) |    0 |             0 |  100 |  120 |  120
+4 | D (7-10, 60) |    2 |             C |  180 |  120 |  180
+5 | E (10-12, 20) |    4 |             D |  200 |  180 |  200
+DP: [0, 60, 120, 120, 180, 200]
+Selected: B, C, D, E -> 200
+Highest-value-first greedy: A, E -> 120
+Independent exhaustive check: 200 across 32 subsets
+Tests passed: supplied schedule, adversarial set, empty set, touching endpoints.

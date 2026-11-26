@@ -1,0 +1,20 @@
+TASK 1 - ALGORITHM DESIGN REVIEW
+Deficiencies in the proposed pseudocode:
+  1. Inputs are unspecified: package records and vehicle capacity have no defined fields or types.
+  2. Arrange packages gives no ordering rule, so different implementations may choose different packages.
+  3. Select the best package does not define best; it must compare value per unit weight.
+  4. Suitable package does not state the feasibility test against remaining capacity.
+  5. The design does not say that a package may be split when only part of its weight fits.
+  6. Remaining capacity is not updated after each choice, so the loop can overfill or fail to progress.
+  7. The result construction and objective value are undefined, and the loop has no precise stop condition.
+
+Greedy rule: process packages by decreasing value/weight ratio.
+Input: A(10,60), B(20,100), C(30,120); capacity=50
+Order: A(6.00) -> B(5.00) -> C(4.00)
+Item | fraction | weight taken | value gained | remaining capacity
+   A |     1.00 |        10.00 |        60.00 |              40.00
+   B |     1.00 |        20.00 |       100.00 |              20.00
+   C |     0.67 |        20.00 |        80.00 |               0.00
+Selected: A:1.00, B:1.00, C:0.67
+Maximum value: 240.00; capacity used: 50.00/50
+Tests passed: supplied design, zero capacity, fractional final item, empty input.
