@@ -1,0 +1,39 @@
+TASK 6 - HELD-KARP TRAVELING SALESPERSON DESIGN CHALLENGE
+Locations: ('Hub', 'A', 'B', 'C', 'D', 'E', 'F')
+Symmetric travel cost matrix:
+       Hub     A     B     C     D     E     F
+  Hub     0    10    15    20    12    18    25
+    A    10     0     8    12     9    14    20
+    B    15     8     0    10    16    11    18
+    C    20    12    10     0     7    13     9
+    D    12     9    16     7     0     6    11
+    E    18    14    11    13     6     0    10
+    F    25    20    18     9    11    10     0
+State definition: DP[S,j] is the least cost from Hub, visiting exactly S, and ending at j.
+Optimal tour: Hub -> D -> E -> F -> C -> B -> A -> Hub
+Minimum tour cost: 65
+Final-state comparison: [('A', 65), ('B', 69), ('C', 75), ('D', 65), ('E', 72), ('F', 76)]
+DP states stored: 192 (expected m*2^(m-1) = 192)
+Predecessor transitions evaluated: 480
+Observed execution: 0.775 ms; Python traced peak memory: 41.1 KiB
+
+INDEPENDENT VALIDATION ON FOUR DELIVERY STOPS
+Held-Karp: 47 route ['Hub', 'D', 'C', 'B', 'A', 'Hub']
+Exhaustive permutation enumeration: 47 route ['Hub', 'A', 'B', 'C', 'D', 'Hub'] (4! = 24 tours)
+
+SCALING EXPERIMENT (three runs; median time and maximum traced memory)
+Stops | theoretical states | observed states | predecessor transitions | median ms | max KiB
+    4 |                 32 |             32 |                      48 |    0.121 |     6.4
+    5 |                 80 |             80 |                     160 |    0.289 |    13.8
+    6 |                192 |            192 |                     480 |    0.742 |    41.5
+    7 |                448 |            448 |                    1344 |    1.899 |    85.7
+    8 |               1024 |           1024 |                    3584 |    4.697 |   184.6
+
+LARGE-SCALE FEASIBILITY (200 delivery locations)
+Exact Held-Karp would store 200*2^199 = 160693804425899027554196209234116260252220299378279283530137600 states and examine on the order of n^2*2^n transitions; it is infeasible in ordinary memory and time. No exact run is attempted.
+For a seconds-scale, approximate requirement, use multi-start nearest-neighbor construction followed by 2-opt improvement. This polynomial-time local search returns a feasible tour quickly but has no general optimality guarantee; use Christofides when a metric-cost 1.5-approximation guarantee is required and its extra construction cost is acceptable.
+
+REFLECTION ( 95 words)
+Held-Karp replaces repeated route enumeration with overlapping subset states. Each state DP[S,j] stores the cheapest partial tour ending at j after visiting S, and a predecessor reconstructs an optimal route. The method is exact, so it also provides a useful benchmark for heuristics on small instances. Its cost is exponential: with m delivery locations it stores O(m 2^m) states and takes O(m^2 2^m) time. It fits small routing problems where optimality matters and memory is sufficient; for hundreds of locations, multi-start construction plus local improvement is more practical when a fast, high-quality tour is acceptable.
+Boundary tests: negative travel cost and zero delivery stops rejected.
+Tests passed: six-stop route, return to hub, independent brute-force optimum, scaling counts, invalid matrix boundaries.

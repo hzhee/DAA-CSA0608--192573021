@@ -1,0 +1,70 @@
+TASK 2 - GREEDY VS DYNAMIC PROGRAMMING
+Normal fractional case: descending ratios are optimal because a final item may be split.
+
+NORMAL CASE
+INPUT: A(w=10,v=60,r=6.00), B(w=20,v=100,r=5.00), C(w=30,v=120,r=4.00); capacity=50
+Fractional greedy, sorted by decreasing value/weight:
+ID | ratio | fraction | value gained | capacity left | decision
+ A |  6.00 |    1.000 |        60.00 |            40 | take
+ B |  5.00 |    1.000 |       100.00 |            20 | take
+ C |  4.00 |    0.667 |        80.00 |             0 | take
+Selected fractions: [('A', 1.0), ('B', 1.0), ('C', 0.667)] value= 240.0
+Ratio-greedy 0/1 decisions:
+A: take; remaining 50->40; running value=60
+B: take; remaining 40->20; running value=160
+C: skip; remaining 20->20; running value=160
+0/1 greedy selection: ['A', 'B'] value= 160
+0/1 DP state: DP[i,w] = best value using first i items within capacity w.
+i | item prefix | values for capacities 0..W
+0 |        none | [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+1 |           A | [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60]
+2 |           B | [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160]
+3 |           C | [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 220]
+DP reconstruction (last item backwards):
+C: take; remaining capacity 50->20; prefix optimum=220
+B: take; remaining capacity 20->0; prefix optimum=100
+A: skip; remaining capacity 0->0; prefix optimum=0
+0/1 DP selection: ['B', 'C'] value= 220
+ENGINEERING EVIDENCE
+Work counters: fractional ratio evaluations=3, fractional item visits=3, 0/1 greedy decisions=3, DP transitions=153.
+State storage: fractional/greedy O(n) item records; DP stores 204 integer cells = O(nW).
+Observed elapsed time (informational only): fractional=7.5 us; DP=14.4 us.
+
+STUDENT-DESIGNED 0/1 COUNTEREXAMPLE
+Prediction before execution: ratio greedy commits to G (ratio 16.50, value 99); that leaves capacity 4 and prevents the compatible pair X+Y (value 100).
+
+BREAK THE 0/1 GREEDY INTUITION
+INPUT: G(w=6,v=99,r=16.50), X(w=5,v=50,r=10.00), Y(w=5,v=50,r=10.00); capacity=10
+Fractional greedy, sorted by decreasing value/weight:
+ID | ratio | fraction | value gained | capacity left | decision
+ G | 16.50 |    1.000 |        99.00 |             4 | take
+ X | 10.00 |    0.800 |        40.00 |             0 | take
+ Y | 10.00 |    0.000 |         0.00 |             0 | stop
+Selected fractions: [('G', 1.0), ('X', 0.8)] value= 139.0
+Ratio-greedy 0/1 decisions:
+G: take; remaining 10->4; running value=99
+X: skip; remaining 4->4; running value=99
+Y: skip; remaining 4->4; running value=99
+0/1 greedy selection: ['G'] value= 99
+0/1 DP state: DP[i,w] = best value using first i items within capacity w.
+i | item prefix | values for capacities 0..W
+0 |        none | [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+1 |           G | [0, 0, 0, 0, 0, 0, 99, 99, 99, 99, 99]
+2 |           X | [0, 0, 0, 0, 0, 50, 99, 99, 99, 99, 99]
+3 |           Y | [0, 0, 0, 0, 0, 50, 99, 99, 99, 99, 100]
+DP reconstruction (last item backwards):
+Y: take; remaining capacity 10->5; prefix optimum=100
+X: take; remaining capacity 5->0; prefix optimum=50
+G: skip; remaining capacity 0->0; prefix optimum=0
+0/1 DP selection: ['X', 'Y'] value= 100
+ENGINEERING EVIDENCE
+Work counters: fractional ratio evaluations=3, fractional item visits=3, 0/1 greedy decisions=3, DP transitions=33.
+State storage: fractional/greedy O(n) item records; DP stores 44 integer cells = O(nW).
+Observed elapsed time (informational only): fractional=3.1 us; DP=4.8 us.
+First blocking commitment: G; greedy value 99 vs DP optimum 100 (gap 1.0%).
+
+CHANGED REQUIREMENT: EXTREMELY FAST, NEAR-OPTIMAL ACCEPTABLE
+On the student case, ratio greedy makes 3 decisions and returns 99/100 (99.0% of optimum), while DP evaluates 33 transitions.
+Decision: use ratio greedy only when a 1% loss is acceptable for this measured case; it has no quality guarantee and the normal 50-capacity 0/1 run shows a larger failure (160 vs 220).
+Boundary tests: negative capacity, zero weight, and negative value rejected.
+Tests passed: fractional optimum, 0/1 optimum, greedy counterexample, empty input, overweight item, invalid data.

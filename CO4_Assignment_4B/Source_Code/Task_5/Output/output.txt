@@ -1,0 +1,85 @@
+TASK 5 - MINIMUM SPANNING TREES IN A NETWORK
+Undirected weighted graph: [('A', 'B', 4), ('A', 'C', 3), ('B', 'C', 1), ('B', 'D', 2), ('C', 'D', 4), ('C', 'E', 5), ('D', 'E', 2), ('D', 'F', 3), ('E', 'F', 1), ('E', 'G', 6), ('F', 'G', 2), ('F', 'H', 4), ('G', 'H', 3)]
+
+BASELINE CONNECTED GRAPH: |V|=8, |E|=13
+
+Kruskal
+Decision trace (u,v,w,action):
+('B', 'C', 1, 'accept')
+('E', 'F', 1, 'accept')
+('B', 'D', 2, 'accept')
+('D', 'E', 2, 'accept')
+('F', 'G', 2, 'accept')
+('A', 'C', 3, 'accept')
+('D', 'F', 3, 'reject: cycle')
+('G', 'H', 3, 'accept')
+MST edges: [('B', 'C', 1), ('E', 'F', 1), ('B', 'D', 2), ('D', 'E', 2), ('F', 'G', 2), ('A', 'C', 3), ('G', 'H', 3)]
+MST cost: 14
+
+Prim (start=C)
+Decision trace (u,v,w,action):
+('C', 'B', 1, 'accept')
+('B', 'D', 2, 'accept')
+('D', 'E', 2, 'accept')
+('E', 'F', 1, 'accept')
+('F', 'G', 2, 'accept')
+('G', 'H', 3, 'accept')
+('D', 'F', 3, 'skip: endpoint already in tree')
+('C', 'A', 3, 'accept')
+MST edges: [('C', 'B', 1), ('B', 'D', 2), ('D', 'E', 2), ('E', 'F', 1), ('F', 'G', 2), ('G', 'H', 3), ('C', 'A', 3)]
+MST cost: 14
+
+Boruvka
+Round 1: component cheapest edges accepted: [('B', 'C', 1), ('E', 'F', 1), ('B', 'D', 2), ('F', 'G', 2), ('A', 'C', 3), ('G', 'H', 3)]
+Round 2: component cheapest edges accepted: [('D', 'E', 2)]
+MST edges: [('B', 'C', 1), ('E', 'F', 1), ('B', 'D', 2), ('F', 'G', 2), ('A', 'C', 3), ('G', 'H', 3), ('D', 'E', 2)]
+MST cost: 14
+Independent verification: all three trees have |V|-1 edges and equal total cost
+
+MULTIPLE-MST MODIFICATION
+Before execution: set AB, AC, BC to weight 1. Equal-cost cycles create multiple valid MST edge sets; lexical Kruskal and reverse-lexical Prim from C are expected to select different ties.
+
+EQUAL-WEIGHT ALTERNATIVE TREES: |V|=8, |E|=13
+
+Kruskal
+Decision trace (u,v,w,action):
+('A', 'B', 1, 'accept')
+('A', 'C', 1, 'accept')
+('B', 'C', 1, 'reject: cycle')
+('E', 'F', 1, 'accept')
+('B', 'D', 2, 'accept')
+('D', 'E', 2, 'accept')
+('F', 'G', 2, 'accept')
+('D', 'F', 3, 'reject: cycle')
+('G', 'H', 3, 'accept')
+MST edges: [('A', 'B', 1), ('A', 'C', 1), ('E', 'F', 1), ('B', 'D', 2), ('D', 'E', 2), ('F', 'G', 2), ('G', 'H', 3)]
+MST cost: 12
+
+Prim (start=C)
+Decision trace (u,v,w,action):
+('C', 'B', 1, 'accept')
+('C', 'A', 1, 'accept')
+('B', 'A', 1, 'skip: endpoint already in tree')
+('B', 'D', 2, 'accept')
+('D', 'E', 2, 'accept')
+('E', 'F', 1, 'accept')
+('F', 'G', 2, 'accept')
+('G', 'H', 3, 'accept')
+MST edges: [('C', 'B', 1), ('C', 'A', 1), ('B', 'D', 2), ('D', 'E', 2), ('E', 'F', 1), ('F', 'G', 2), ('G', 'H', 3)]
+MST cost: 12
+
+Boruvka
+Round 1: component cheapest edges accepted: [('A', 'B', 1), ('A', 'C', 1), ('E', 'F', 1), ('B', 'D', 2), ('F', 'G', 2), ('G', 'H', 3)]
+Round 2: component cheapest edges accepted: [('D', 'E', 2)]
+MST edges: [('A', 'B', 1), ('A', 'C', 1), ('E', 'F', 1), ('B', 'D', 2), ('F', 'G', 2), ('G', 'H', 3), ('D', 'E', 2)]
+MST cost: 12
+Independent verification: all three trees have |V|-1 edges and equal total cost
+Tie outcome check: Kruskal edges: [('A', 'B', 1), ('A', 'C', 1), ('E', 'F', 1), ('B', 'D', 2), ('D', 'E', 2), ('F', 'G', 2), ('G', 'H', 3)] ; Prim edges: [('C', 'B', 1), ('C', 'A', 1), ('B', 'D', 2), ('D', 'E', 2), ('E', 'F', 1), ('F', 'G', 2), ('G', 'H', 3)]
+
+ENGINEERING COMPARISON
+Kruskal sorts edges once: O(E log E), with near-constant amortized DSU operations; suitable for sparse edge lists.
+Prim with a binary heap: O(E log V), grows one connected frontier; useful for adjacency lists and dense graphs with a matrix implementation.
+Boruvka scans all edges in O(E) per phase and reduces components by at least half: O(E log V); each component can choose its cheapest outgoing edge in parallel, which fits distributed network construction.
+Failure test: disconnected graph rejected: a spanning tree does not exist: graph is disconnected
+Boundary test: negative edge accepted (-2 MST cost); self-loop rejected.
+Tests passed: 8 vertices/13 edges, equal optimal costs, alternate MSTs, disconnected graph, invalid Prim root, negative weight, self-loop.

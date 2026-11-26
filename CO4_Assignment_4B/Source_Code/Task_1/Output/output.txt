@@ -1,0 +1,118 @@
+TASK 1 - WORD WRAP DOCUMENT LAYOUT
+Input words: dynamic programming makes documents readable for everyone
+Penalty rule: a non-final line contributes (unused spaces)^2; the final line contributes 0.
+
+BEFORE RUNNING WIDTH 16
+Predict: line 1 ends after 'dynamic'; widening to 22 should combine the first two words. I expect the total penalty to fall.
+
+MODIFIED-WIDTH RUN: width=16
+DP state: dp[i] is the minimum penalty for laying out words 1..i.
+i | feasible predecessor j | used | unused | line penalty | dp[j]+penalty
+1 |                       0 |    7 |      9 |           81 |             81
+dp[1] = 81; predecessor = 0
+2 |                       1 |   11 |      5 |           25 |            106
+dp[2] = 106; predecessor = 1
+3 |                       2 |    5 |     11 |          121 |            227
+dp[3] = 227; predecessor = 2
+4 |                       2 |   15 |      1 |            1 |            107
+4 |                       3 |    9 |      7 |           49 |            276
+dp[4] = 107; predecessor = 2
+5 |                       4 |    8 |      8 |           64 |            171
+dp[5] = 171; predecessor = 4
+6 |                       4 |   12 |      4 |           16 |            123
+6 |                       5 |    3 |     13 |          169 |            340
+dp[6] = 123; predecessor = 4
+7 |                       5 |   12 |      4 |            0 |            171
+7 |                       6 |    8 |      8 |            0 |            123
+dp[7] = 123; predecessor = 6
+Line | words | used characters | unused spaces | line penalty
+   1 | dynamic |               7 |             9 |           81
+   2 | programming |              11 |             5 |           25
+   3 | makes documents |              15 |             1 |            1
+   4 | readable for |              12 |             4 |           16
+   5 | everyone |               8 |             8 |            0
+Minimum total penalty: 123
+DP states evaluated: 7 prefix states; candidate transitions: 10
+
+BEFORE RUNNING WIDTH 22
+Predict: line 1 remains 'dynamic programming'; the added width should reduce its slack penalty, so total penalty should fall from width 16.
+
+MODIFIED-WIDTH RUN: width=22
+DP state: dp[i] is the minimum penalty for laying out words 1..i.
+i | feasible predecessor j | used | unused | line penalty | dp[j]+penalty
+1 |                       0 |    7 |     15 |          225 |            225
+dp[1] = 225; predecessor = 0
+2 |                       0 |   19 |      3 |            9 |              9
+2 |                       1 |   11 |     11 |          121 |            346
+dp[2] = 9; predecessor = 0
+3 |                       1 |   17 |      5 |           25 |            250
+3 |                       2 |    5 |     17 |          289 |            298
+dp[3] = 250; predecessor = 1
+4 |                       2 |   15 |      7 |           49 |             58
+4 |                       3 |    9 |     13 |          169 |            419
+dp[4] = 58; predecessor = 2
+5 |                       3 |   18 |      4 |           16 |            266
+5 |                       4 |    8 |     14 |          196 |            254
+dp[5] = 254; predecessor = 4
+6 |                       3 |   22 |      0 |            0 |            250
+6 |                       4 |   12 |     10 |          100 |            158
+6 |                       5 |    3 |     19 |          361 |            615
+dp[6] = 158; predecessor = 4
+7 |                       4 |   21 |      1 |            0 |             58
+7 |                       5 |   12 |     10 |            0 |            254
+7 |                       6 |    8 |     14 |            0 |            158
+dp[7] = 58; predecessor = 4
+Line | words | used characters | unused spaces | line penalty
+   1 | dynamic programming |              19 |             3 |            9
+   2 | makes documents |              15 |             7 |           49
+   3 | readable for everyone |              21 |             1 |            0
+Minimum total penalty: 58
+DP states evaluated: 7 prefix states; candidate transitions: 15
+
+BEFORE RUNNING WIDTH 28
+Predict: the first line can absorb 'makes'; I expect at least one later line boundary to move and the total penalty to fall from width 22.
+
+MODIFIED-WIDTH RUN: width=28
+DP state: dp[i] is the minimum penalty for laying out words 1..i.
+i | feasible predecessor j | used | unused | line penalty | dp[j]+penalty
+1 |                       0 |    7 |     21 |          441 |            441
+dp[1] = 441; predecessor = 0
+2 |                       0 |   19 |      9 |           81 |             81
+2 |                       1 |   11 |     17 |          289 |            730
+dp[2] = 81; predecessor = 0
+3 |                       0 |   25 |      3 |            9 |              9
+3 |                       1 |   17 |     11 |          121 |            562
+3 |                       2 |    5 |     23 |          529 |            610
+dp[3] = 9; predecessor = 0
+4 |                       1 |   27 |      1 |            1 |            442
+4 |                       2 |   15 |     13 |          169 |            250
+4 |                       3 |    9 |     19 |          361 |            370
+dp[4] = 250; predecessor = 2
+5 |                       2 |   24 |      4 |           16 |             97
+5 |                       3 |   18 |     10 |          100 |            109
+5 |                       4 |    8 |     20 |          400 |            650
+dp[5] = 97; predecessor = 2
+6 |                       2 |   28 |      0 |            0 |             81
+6 |                       3 |   22 |      6 |           36 |             45
+6 |                       4 |   12 |     16 |          256 |            506
+6 |                       5 |    3 |     25 |          625 |            722
+dp[6] = 45; predecessor = 3
+7 |                       4 |   21 |      7 |            0 |            250
+7 |                       5 |   12 |     16 |            0 |             97
+7 |                       6 |    8 |     20 |            0 |             45
+dp[7] = 45; predecessor = 6
+Line | words | used characters | unused spaces | line penalty
+   1 | dynamic programming makes |              25 |             3 |            9
+   2 | documents readable for |              22 |             6 |           36
+   3 | everyone |               8 |            20 |            0
+Minimum total penalty: 45
+DP states evaluated: 7 prefix states; candidate transitions: 19
+
+PREDICTION CHECK
+width 16: observed 5 lines; penalty 123; first line: dynamic
+width 22: observed 3 lines; penalty 58; first line: dynamic programming
+width 28: observed 3 lines; penalty 45; first line: dynamic programming makes
+Boundary test: over-width word rejected: words must be non-empty and each word must fit the line width
+Boundary test: zero width rejected: line width must be positive
+Boundary rationale: a word one character wider than W can cause an infinite reconstruction or impossible line unless it is rejected explicitly.
+Tests passed: three width runs, exact-fit words, empty input, over-width word, zero width.

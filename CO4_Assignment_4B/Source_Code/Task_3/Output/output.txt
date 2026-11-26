@@ -1,0 +1,87 @@
+TASK 3 - ROUTING ENGINE UNDER CHANGING NETWORK CONDITIONS
+Vertices: A, B, C, D, E, F, G, H
+BASE DIRECTED EDGES (12): [('A', 'B', 2), ('A', 'C', 5), ('B', 'D', 2), ('B', 'E', 6), ('C', 'B', 1), ('C', 'D', 1), ('C', 'F', 5), ('D', 'E', 1), ('D', 'G', 4), ('E', 'H', 2), ('F', 'E', 1), ('G', 'H', 1)]
+
+STAGE A - DIJKSTRA, SOURCE A
+Finalization order and relaxations:
+A finalized at 0; relaxations: B:inf->2, C:inf->5
+B finalized at 2; relaxations: D:inf->4, E:inf->8
+D finalized at 4; relaxations: E:8->5, G:inf->8
+C finalized at 5; relaxations: F:inf->10
+E finalized at 5; relaxations: H:inf->7
+H finalized at 7; relaxations: none
+G finalized at 8; relaxations: none
+F finalized at 10; relaxations: none
+Distances from A:
+A : {'A': '0', 'B': '2', 'C': '5', 'D': '4', 'E': '5', 'F': '10', 'G': '8', 'H': '7'}
+Predecessors: {'A': None, 'B': 'A', 'C': 'A', 'D': 'B', 'E': 'D', 'F': 'C', 'G': 'D', 'H': 'E'}
+Path A->A: A
+Path A->B: A->B
+Path A->C: A->C
+Path A->D: A->B->D
+Path A->E: A->B->D->E
+Path A->F: A->C->F
+Path A->G: A->B->D->G
+Path A->H: A->B->D->E->H
+
+STAGE B - PREDICTION BEFORE EXECUTION
+Replace C->B weight +1 by -4. Prediction: Dijkstra's nonnegative-weight assumption is violated; after finalizing B at 2, the later A->C->B route costs 1 and may be ignored. Bellman-Ford should revise B and its descendants.
+Modified edge list: [('A', 'B', 2), ('A', 'C', 5), ('B', 'D', 2), ('B', 'E', 6), ('C', 'B', -4), ('C', 'D', 1), ('C', 'F', 5), ('D', 'E', 1), ('D', 'G', 4), ('E', 'H', 2), ('F', 'E', 1), ('G', 'H', 1)]
+Experimental Dijkstra finalization: [('A', 0), ('B', 2), ('D', 4), ('C', 5), ('E', 5), ('H', 7), ('G', 8), ('F', 10)]
+Experimental Dijkstra distances: {'A': '0', 'B': '2', 'C': '5', 'D': '4', 'E': '5', 'F': '10', 'G': '8', 'H': '7'}
+Bellman-Ford pass updates:
+1 : A->B:inf->2, A->C:inf->5, B->D:inf->4, B->E:inf->8, C->B:2->1, C->F:inf->10, D->E:8->5, D->G:inf->8, E->H:inf->7
+2 : B->D:4->3, D->E:5->4, D->G:8->7, E->H:7->6
+3 : no changes
+Bellman-Ford distances: {'A': '0', 'B': '1', 'C': '5', 'D': '3', 'E': '4', 'F': '10', 'G': '7', 'H': '6'}
+Bellman-Ford path A->H: A->C->B->D->E->H
+Prediction check: B distance is 2 under Dijkstra and 1 under Bellman-Ford.
+
+STAGE C - REACHABLE NEGATIVE-CYCLE FAILURE
+Added D->C=-5. The reachable cycle C->B->D->C has total weight -4+2-5=-7.
+Bellman-Ford passes: 7 of at most 7
+Negative cycle detected by an additional relaxability scan: True
+Shortest-path values are not reported for this graph because repeated cycle traversal can lower cost without bound.
+
+STAGE D - ALL-PAIRS ANALYTICS ON THE NEGATIVE-EDGE, NO-CYCLE GRAPH
+Floyd intermediate vertices and improved pairs:
+A : []
+B : [('A', 'D', 4), ('A', 'E', 8), ('C', 'D', -2), ('C', 'E', 2)]
+C : [('A', 'B', 1), ('A', 'D', 3), ('A', 'E', 7), ('A', 'F', 10)]
+D : [('A', 'E', 4), ('A', 'G', 7), ('B', 'E', 3), ('B', 'G', 6), ('C', 'E', -1), ('C', 'G', 2)]
+E : [('A', 'H', 6), ('B', 'H', 5), ('C', 'H', 1), ('D', 'H', 3), ('F', 'H', 3)]
+F : []
+G : []
+H : []
+Floyd distance matrix (rows are sources, columns are destinations):
+       A    B    C    D    E    F    G    H
+  A    0    1    5    3    4   10    7    6
+  B  INF    0  INF    2    3  INF    6    5
+  C  INF   -4    0   -2   -1    5    2    1
+  D  INF  INF  INF    0    1  INF    4    3
+  E  INF  INF  INF  INF    0  INF  INF    2
+  F  INF  INF  INF  INF    1    0  INF    3
+  G  INF  INF  INF  INF  INF  INF    0    1
+  H  INF  INF  INF  INF  INF  INF  INF    0
+Floyd reports negative cycle: False
+Warshall intermediate vertices and newly reachable pairs:
+A : []
+B : [('A', 'D'), ('A', 'E'), ('C', 'E')]
+C : [('A', 'F')]
+D : [('A', 'G'), ('B', 'G'), ('C', 'G')]
+E : [('A', 'H'), ('B', 'H'), ('C', 'H'), ('D', 'H'), ('F', 'H')]
+F : []
+G : []
+H : []
+Warshall reachability matrix (1=reachable, including self):
+      A   B   C   D   E   F   G   H
+  A   1   1   1   1   1   1   1   1
+  B   0   1   0   1   1   0   1   1
+  C   0   1   1   1   1   1   1   1
+  D   0   0   0   1   1   0   1   1
+  E   0   0   0   0   1   0   0   1
+  F   0   0   0   0   1   1   0   1
+  G   0   0   0   0   0   0   1   1
+  H   0   0   0   0   0   0   0   1
+Boundary validation: strict Dijkstra rejects the negative edge: Dijkstra requires nonnegative edge weights
+Tests passed: 8 vertices/12 edges, route reconstruction, negative-edge divergence, reachable negative cycle, all-pairs matrices, unreachable vertex.

@@ -1,0 +1,56 @@
+TASK 4 - SMART MANUFACTURING ASSEMBLY LINE SCHEDULING
+
+BASELINE INPUT
+Entry costs at Station 1: 9 on Line 1; 12 on Line 2
+Station | L1 stay | L1 transfer | choose L1 | L2 stay | L2 transfer | choose L2 | best L1 | best L2
+2 | 18 | 23 | stay on Line 1 | 17 | 16 | transfer from Line 1 | 18 | 16
+3 | 21 | 20 | transfer from Line 2 | 22 | 27 | stay on Line 2 | 20 | 22
+4 | 24 | 28 | stay on Line 1 | 26 | 25 | transfer from Line 1 | 24 | 25
+5 | 32 | 35 | stay on Line 1 | 30 | 32 | stay on Line 2 | 32 | 30
+6 | 36 | 35 | transfer from Line 2 | 37 | 43 | stay on Line 2 | 35 | 37
+Route: Entry -> Line 1 - Station 1 -> Line 2 - Station 2 -> Line 1 - Station 3 -> Line 2 - Station 4 -> Line 2 - Station 5 -> Line 1 - Station 6 -> Exit Line 1
+Selected line at each station: [1, 2, 1, 2, 2, 1]
+Transfer points (destination station, from, to): [(2, 1, 2), (3, 2, 1), (4, 1, 2), (6, 2, 1)]
+Exit comparison: {'Line 1': 38, 'Line 2': 39}
+Minimum production time: 38
+
+TRANSFER-TIME PREDICTION BEFORE EXECUTION
+Increase Line 1->Line 2 transfer before Station 4 from 1 to 20. Prediction: the transfer into Line 2 at Station 4 will no longer be selected; minimum time will not decrease.
+
+TRANSFER-TIME CHALLENGE
+Entry costs at Station 1: 9 on Line 1; 12 on Line 2
+Station | L1 stay | L1 transfer | choose L1 | L2 stay | L2 transfer | choose L2 | best L1 | best L2
+2 | 18 | 23 | stay on Line 1 | 17 | 16 | transfer from Line 1 | 18 | 16
+3 | 21 | 20 | transfer from Line 2 | 22 | 27 | stay on Line 2 | 20 | 22
+4 | 24 | 28 | stay on Line 1 | 26 | 44 | stay on Line 2 | 24 | 26
+5 | 32 | 36 | stay on Line 1 | 31 | 32 | stay on Line 2 | 32 | 31
+6 | 36 | 36 | stay on Line 1 | 38 | 43 | stay on Line 2 | 36 | 38
+Route: Entry -> Line 1 - Station 1 -> Line 2 - Station 2 -> Line 1 - Station 3 -> Line 1 - Station 4 -> Line 1 - Station 5 -> Line 1 - Station 6 -> Exit Line 1
+Selected line at each station: [1, 2, 1, 1, 1, 1]
+Transfer points (destination station, from, to): [(2, 1, 2), (3, 2, 1)]
+Exit comparison: {'Line 1': 39, 'Line 2': 40}
+Minimum production time: 39
+Prediction check: route changed = True ; time change = 1
+
+MACHINE-SLOWDOWN PREDICTION BEFORE EXECUTION
+Increase Line 1 Station 3 processing time from 3 to 30. Prediction: production will prefer Line 2 at Station 3; minimum time will rise because a processing time only increased.
+
+PRODUCTION DISRUPTION
+Entry costs at Station 1: 9 on Line 1; 12 on Line 2
+Station | L1 stay | L1 transfer | choose L1 | L2 stay | L2 transfer | choose L2 | best L1 | best L2
+2 | 18 | 23 | stay on Line 1 | 17 | 16 | transfer from Line 1 | 18 | 16
+3 | 48 | 47 | transfer from Line 2 | 22 | 27 | stay on Line 2 | 47 | 22
+4 | 51 | 28 | transfer from Line 2 | 26 | 52 | stay on Line 2 | 28 | 26
+5 | 36 | 36 | stay on Line 1 | 31 | 36 | stay on Line 2 | 36 | 31
+6 | 40 | 36 | transfer from Line 2 | 38 | 47 | stay on Line 2 | 36 | 38
+Route: Entry -> Line 1 - Station 1 -> Line 2 - Station 2 -> Line 2 - Station 3 -> Line 2 - Station 4 -> Line 2 - Station 5 -> Line 1 - Station 6 -> Exit Line 1
+Selected line at each station: [1, 2, 2, 2, 2, 1]
+Transfer points (destination station, from, to): [(2, 1, 2), (6, 2, 1)]
+Exit comparison: {'Line 1': 39, 'Line 2': 40}
+Minimum production time: 39
+Prediction check: route changed = True ; time change = 1
+The route switches to Line 2 at Station 3 because its station time is now lower than staying on Line 1 plus any required transfer.
+
+THREE-LINE ENGINEERING EXTENSION (not implemented)
+Use DP[line,station] for each of three lines. For every station, compare staying on line l with transfers from each of the other two lines, adding the appropriate transfer and processing time. Store predecessor line for every state to reconstruct the route. Time becomes O(L^2*n) and state storage O(L*n) for L lines; entry/exit costs and transfer data also become per-line/per-pair.
+Tests passed: baseline route, transfer change, station slowdown, one-station boundary, invalid negative time.
